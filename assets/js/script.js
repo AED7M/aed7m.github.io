@@ -1,13 +1,25 @@
 $(function() {
 
+    // Improved mobile navigation toggle with faster animations
     $('.navbar-toggle').click(function() {
         $(this).toggleClass('act');
-            if($(this).hasClass('act')) {
-                $('.main-menu').addClass('act');
-            }
-            else {
+        if($(this).hasClass('act')) {
+            $('.main-menu').addClass('act');
+            // Fast animation for menu items
+            setTimeout(function() {
+                $('.main-menu li').each(function(index) {
+                    var $this = $(this);
+                    setTimeout(function() {
+                        $this.addClass('visible');
+                    }, 50 * index); // Staggered but fast animation
+                });
+            }, 100);
+        } else {
+            $('.main-menu li').removeClass('visible');
+            setTimeout(function() {
                 $('.main-menu').removeClass('act');
-            }
+            }, 100);
+        }
     });
 
     //jQuery for page scrolling feature - requires jQuery Easing plugin

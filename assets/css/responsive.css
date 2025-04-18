@@ -20,6 +20,12 @@
     transition: all 0.3s ease-in-out;
 }
 
+/* Mobile Navigation Visibility Helpers */
+.main-menu li.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1199px) {
 	/* HEADER
@@ -267,6 +273,12 @@
 		margin-top: 10px;
 		border-radius: 5px;
 		box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+		position: absolute;
+		left: 0;
+		right: 0;
+		width: 100%;
+		z-index: 100;
+		transition: all 0.3s ease-in-out; /* Faster animation */
 	}
 
 	.main-menu.act {
@@ -279,6 +291,7 @@
 		opacity: 1;
 		-webkit-transform: translateX(0);
 		transform: translateX(0);
+		transition: all 0.2s ease-in-out; /* Faster animation */
 	}
 
 	.main-menu ul {
@@ -288,19 +301,19 @@
 
 	.main-menu li {
 		padding: 8px 0;
-		-webkit-transition: all 400ms 510ms;
-		transition: all 400ms 510ms;
+		-webkit-transition: all 0.2s ease-in-out; /* Faster animation */
+		transition: all 0.2s ease-in-out;
 		opacity: 0;
 	}
 
 	.main-menu li:nth-child(odd) {
-		-webkit-transform: translateX(30%);
-		transform: translateX(30%);
+		-webkit-transform: translateX(20px); /* Reduced animation distance */
+		transform: translateX(20px);
 	}
 
 	.main-menu li:nth-child(even) {
-		-webkit-transform: translateX(-30%);
-		transform: translateX(-30%);
+		-webkit-transform: translateX(-20px); /* Reduced animation distance */
+		transform: translateX(-20px);
 	}
 
 	/* Mobile Navbar Styling */
@@ -554,6 +567,36 @@
 	.site-footer .col-xs-12 {
 		text-align: center;
 	}
+
+	/* Fix to ensure no empty space/card in the mobile view */
+	.section-portfolio .row {
+		margin-left: -15px;
+		margin-right: -15px;
+		clear: both;
+		overflow: hidden; /* Prevent overflow issues */
+	}
+
+	.section-portfolio .portfolio-card {
+		margin-bottom: 30px;
+	}
+
+	/* Fix for single card in second row */
+	.section-portfolio .row .col-md-offset-4 {
+		margin-left: 0; /* Remove offset on mobile */
+	}
+
+    /* Fix for Portfolio Layout in Mobile View */
+    .section-portfolio .col-xs-12 {
+        float: none;
+        clear: both;
+        margin-bottom: 30px;
+    }
+    
+    .section-portfolio .portfolio-card {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 /* Extra Small Devices, Phones */ 
