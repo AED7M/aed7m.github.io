@@ -20,12 +20,6 @@
     transition: all 0.3s ease-in-out;
 }
 
-/* Mobile Navigation Visibility Helpers */
-.main-menu li.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1199px) {
 	/* HEADER
@@ -273,12 +267,6 @@
 		margin-top: 10px;
 		border-radius: 5px;
 		box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-		position: absolute;
-		left: 0;
-		right: 0;
-		width: 100%;
-		z-index: 100;
-		transition: all 0.3s ease-in-out; /* Faster animation */
 	}
 
 	.main-menu.act {
@@ -291,7 +279,6 @@
 		opacity: 1;
 		-webkit-transform: translateX(0);
 		transform: translateX(0);
-		transition: all 0.2s ease-in-out; /* Faster animation */
 	}
 
 	.main-menu ul {
@@ -301,19 +288,19 @@
 
 	.main-menu li {
 		padding: 8px 0;
-		-webkit-transition: all 0.2s ease-in-out; /* Faster animation */
-		transition: all 0.2s ease-in-out;
+		-webkit-transition: all 400ms 510ms;
+		transition: all 400ms 510ms;
 		opacity: 0;
 	}
 
 	.main-menu li:nth-child(odd) {
-		-webkit-transform: translateX(20px); /* Reduced animation distance */
-		transform: translateX(20px);
+		-webkit-transform: translateX(30%);
+		transform: translateX(30%);
 	}
 
 	.main-menu li:nth-child(even) {
-		-webkit-transform: translateX(-20px); /* Reduced animation distance */
-		transform: translateX(-20px);
+		-webkit-transform: translateX(-30%);
+		transform: translateX(-30%);
 	}
 
 	/* Mobile Navbar Styling */
@@ -391,6 +378,57 @@
         color: #3498db; /* Blue color on hover */
         border-bottom: 2px solid #3498db;
         transform: translateX(5px);
+    }
+
+	/* Fix for mobile menu not appearing when clicked */
+    #portfolio-insights-collapse {
+        display: none;
+        background-color: rgba(27, 36, 47, 0.95);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 9999;
+        text-align: center;
+        padding: 15px 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 0 0 4px 4px;
+    }
+    
+    /* Active/visible state with !important to override conflicting styles */
+    #portfolio-insights-collapse.show-menu {
+        display: block !important;
+    }
+    
+    /* Menu items styling */
+    #portfolio-insights-collapse .navbar-nav {
+        float: none;
+        margin: 0 auto;
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+    }
+    
+    #portfolio-insights-collapse .navbar-nav > li {
+        float: none;
+        display: block;
+        text-align: center;
+        margin: 10px 0;
+    }
+    
+    #portfolio-insights-collapse .navbar-nav > li > a {
+        display: inline-block;
+        padding: 8px 15px;
+        color: #fff;
+        font-size: 16px;
+        transition: all 0.2s ease;
+    }
+    
+    #portfolio-insights-collapse .navbar-nav > li > a:hover,
+    #portfolio-insights-collapse .navbar-nav > li.active > a {
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
     }
 
 	/* HERO
@@ -567,55 +605,6 @@
 	.site-footer .col-xs-12 {
 		text-align: center;
 	}
-
-	/* Fix to ensure no empty space/card in the mobile view */
-	.section-portfolio .row {
-		margin-left: -15px;
-		margin-right: -15px;
-		clear: both;
-		overflow: hidden; /* Prevent overflow issues */
-	}
-
-	.section-portfolio .portfolio-card {
-		margin-bottom: 30px;
-	}
-
-	/* Fix for single card in second row */
-	.section-portfolio .row .col-md-offset-4 {
-		margin-left: 0; /* Remove offset on mobile */
-	}
-
-    /* Fix for Portfolio Layout in Mobile View */
-    .section-portfolio .col-xs-12 {
-        float: none;
-        clear: both;
-        margin-bottom: 30px;
-    }
-    
-    .section-portfolio .portfolio-card {
-        max-width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    /* Fixed Mobile Navigation - Preventing blue box when collapsed */
-    #portfolio-insights-collapse {
-        display: none; /* Hide by default */
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 100%;
-        width: 100%;
-        z-index: 100;
-    }
-    
-    #portfolio-insights-collapse.in {
-        display: block; /* Only show when active */
-    }
-    
-    .navbar-toggle {
-        z-index: 101;
-    }
 }
 
 /* Extra Small Devices, Phones */ 

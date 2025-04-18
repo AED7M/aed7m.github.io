@@ -1,30 +1,36 @@
 $(function() {
 
-    // Proper Bootstrap mobile menu toggle with issue fixing
+    // Mobile menu toggle fix - completely rewritten for reliability
     $(document).ready(function() {
-        $('.navbar-toggle').click(function() {
-            // Properly toggle the navigation
-            $('#portfolio-insights-collapse').toggleClass('in');
+        // Simple mobile menu toggle that works reliably
+        $('.navbar-toggle').on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             
+            // Toggle show-menu class to control visibility
+            $('#portfolio-insights-collapse').toggleClass('show-menu');
+            
+            // Toggle collapsed class on button for styling
             $(this).toggleClass('collapsed');
-            
-            // Set aria attributes for accessibility
-            var isExpanded = $(this).hasClass('collapsed') ? 'false' : 'true';
-            $(this).attr('aria-expanded', isExpanded);
         });
         
-        // Hide menu when clicking outside
-        $(document).click(function(event) {
-            if (!$(event.target).closest('.navbar-toggle, #portfolio-insights-collapse').length) {
-                $('#portfolio-insights-collapse').removeClass('in');
-                $('.navbar-toggle').addClass('collapsed').attr('aria-expanded', 'false');
+        // Close menu when clicking anywhere else
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.navbar-toggle, #portfolio-insights-collapse').length) {
+                $('#portfolio-insights-collapse').removeClass('show-menu');
+                $('.navbar-toggle').addClass('collapsed');
             }
         });
         
-        // Hide menu when clicking a menu item
-        $('.main-menu .nav li a').click(function() {
-            $('#portfolio-insights-collapse').removeClass('in');
-            $('.navbar-toggle').addClass('collapsed').attr('aria-expanded', 'false');
+        // Prevent clicks inside menu from closing it
+        $('#portfolio-insights-collapse').on('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // Close menu when clicking on menu items
+        $('#portfolio-insights-collapse .navbar-nav li a').on('click', function() {
+            $('#portfolio-insights-collapse').removeClass('show-menu');
+            $('.navbar-toggle').addClass('collapsed');
         });
     });
 
