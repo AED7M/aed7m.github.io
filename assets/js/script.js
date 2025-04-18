@@ -1,36 +1,31 @@
 $(function() {
 
-    // Mobile menu toggle fix - completely rewritten for reliability
+    // Mobile menu toggle fix - simplified
     $(document).ready(function() {
-        // Simple mobile menu toggle that works reliably
+        // Simple toggle for mobile menu
         $('.navbar-toggle').on('click', function(e) {
             e.preventDefault();
-            e.stopPropagation();
-            
-            // Toggle show-menu class to control visibility
-            $('#portfolio-insights-collapse').toggleClass('show-menu');
-            
-            // Toggle collapsed class on button for styling
-            $(this).toggleClass('collapsed');
+            $('#portfolio-insights-collapse').toggleClass('mobile-active');
+            $(this).toggleClass('active');
         });
         
-        // Close menu when clicking anywhere else
+        // Close menu when clicking menu items
+        $('#portfolio-insights-collapse .navbar-nav li a').on('click', function() {
+            $('#portfolio-insights-collapse').removeClass('mobile-active');
+            $('.navbar-toggle').removeClass('active');
+        });
+        
+        // Close menu when clicking outside
         $(document).on('click', function(e) {
             if (!$(e.target).closest('.navbar-toggle, #portfolio-insights-collapse').length) {
-                $('#portfolio-insights-collapse').removeClass('show-menu');
-                $('.navbar-toggle').addClass('collapsed');
+                $('#portfolio-insights-collapse').removeClass('mobile-active');
+                $('.navbar-toggle').removeClass('active');
             }
         });
         
-        // Prevent clicks inside menu from closing it
+        // Prevent document click from closing menu
         $('#portfolio-insights-collapse').on('click', function(e) {
             e.stopPropagation();
-        });
-        
-        // Close menu when clicking on menu items
-        $('#portfolio-insights-collapse .navbar-nav li a').on('click', function() {
-            $('#portfolio-insights-collapse').removeClass('show-menu');
-            $('.navbar-toggle').addClass('collapsed');
         });
     });
 
