@@ -798,6 +798,46 @@ html, body {
     transform: translateY(-2px);
 }
 
+/* Additional hero card mobile styles */
+@media (max-width: 767px) {
+    .hero {
+        min-height: auto;
+        height: auto;
+    }
+    
+    .hero-row {
+        display: block;
+    }
+    
+    .hero-content-left, 
+    .hero-content-right {
+        width: 100%;
+        padding: 0 15px;
+    }
+    
+    .hero-card {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    
+    .smaller-text {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    
+    .card-header {
+        padding: 12px 15px;
+    }
+    
+    .card-body {
+        padding: 15px;
+    }
+    
+    .expertise-tag {
+        margin-bottom: 8px;
+    }
+}
+
 /* SITEMAIN
 ================================================== */
 .site-main {
