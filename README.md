@@ -16,7 +16,6 @@ This portfolio website highlights my expertise in:
 - Interactive elements including animated counters and particle effects
 - Project showcase with detailed descriptions
 - Contact form for potential employers or clients
-- Dark/light mode toggle for comfortable viewing
 
 ## Projects Showcased
 
