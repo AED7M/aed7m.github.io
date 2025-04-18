@@ -597,6 +597,25 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    /* Fixed Mobile Navigation - Preventing blue box when collapsed */
+    #portfolio-insights-collapse {
+        display: none; /* Hide by default */
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        width: 100%;
+        z-index: 100;
+    }
+    
+    #portfolio-insights-collapse.in {
+        display: block; /* Only show when active */
+    }
+    
+    .navbar-toggle {
+        z-index: 101;
+    }
 }
 
 /* Extra Small Devices, Phones */ 

@@ -1,25 +1,31 @@
 $(function() {
 
-    // Improved mobile navigation toggle with faster animations
-    $('.navbar-toggle').click(function() {
-        $(this).toggleClass('act');
-        if($(this).hasClass('act')) {
-            $('.main-menu').addClass('act');
-            // Fast animation for menu items
-            setTimeout(function() {
-                $('.main-menu li').each(function(index) {
-                    var $this = $(this);
-                    setTimeout(function() {
-                        $this.addClass('visible');
-                    }, 50 * index); // Staggered but fast animation
-                });
-            }, 100);
-        } else {
-            $('.main-menu li').removeClass('visible');
-            setTimeout(function() {
-                $('.main-menu').removeClass('act');
-            }, 100);
-        }
+    // Proper Bootstrap mobile menu toggle with issue fixing
+    $(document).ready(function() {
+        $('.navbar-toggle').click(function() {
+            // Properly toggle the navigation
+            $('#portfolio-insights-collapse').toggleClass('in');
+            
+            $(this).toggleClass('collapsed');
+            
+            // Set aria attributes for accessibility
+            var isExpanded = $(this).hasClass('collapsed') ? 'false' : 'true';
+            $(this).attr('aria-expanded', isExpanded);
+        });
+        
+        // Hide menu when clicking outside
+        $(document).click(function(event) {
+            if (!$(event.target).closest('.navbar-toggle, #portfolio-insights-collapse').length) {
+                $('#portfolio-insights-collapse').removeClass('in');
+                $('.navbar-toggle').addClass('collapsed').attr('aria-expanded', 'false');
+            }
+        });
+        
+        // Hide menu when clicking a menu item
+        $('.main-menu .nav li a').click(function() {
+            $('#portfolio-insights-collapse').removeClass('in');
+            $('.navbar-toggle').addClass('collapsed').attr('aria-expanded', 'false');
+        });
     });
 
     //jQuery for page scrolling feature - requires jQuery Easing plugin
