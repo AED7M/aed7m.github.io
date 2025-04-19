@@ -448,4 +448,29 @@ document.addEventListener('DOMContentLoaded', function() {
             "retina_detect": true
         });
     }
+
+    // Mobile header scroll behavior
+    if (window.innerWidth <= 767) {
+        // Function to update header on scroll
+        function updateMobileHeader() {
+            const header = document.getElementById('masthead');
+            const scrollY = window.scrollY || window.pageYOffset;
+            
+            if (scrollY > 50) {
+                // When scrolled, make header more visible
+                header.style.backgroundColor = 'rgba(33, 33, 33, 0.98)';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+            } else {
+                // At the top, slightly more transparent
+                header.style.backgroundColor = 'rgba(33, 33, 33, 0.95)';
+                header.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
+            }
+        }
+        
+        // Initial call
+        updateMobileHeader();
+        
+        // Listen for scroll
+        window.addEventListener('scroll', updateMobileHeader);
+    }
 });
