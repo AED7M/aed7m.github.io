@@ -47,6 +47,60 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <style id="mobile-menu-fix">
+    /* Mobile Menu Fix - Direct Implementation */
+    @media only screen and (max-width: 767px) {
+      /* Reset any conflicting styles */
+      #portfolio-insights-collapse {
+        display: none !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: rgba(27, 36, 47, 0.95);
+        padding: 15px 0;
+        margin: 0 !important;
+        z-index: 1000;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      
+      #portfolio-insights-collapse.menu-visible {
+        display: block !important;
+      }
+      
+      /* Fix for navbar-nav not displaying properly */
+      #portfolio-insights-collapse .navbar-nav {
+        float: none !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        width: 100% !important;
+        display: block !important;
+      }
+      
+      #portfolio-insights-collapse .navbar-nav > li {
+        float: none !important;
+        display: block !important;
+        margin: 10px 0 !important;
+        text-align: center !important;
+      }
+      
+      #portfolio-insights-collapse .navbar-nav > li > a {
+        display: inline-block !important;
+        padding: 8px 15px !important;
+        color: #fff !important;
+        font-size: 16px !important;
+        border-bottom: 2px solid transparent !important;
+      }
+      
+      #portfolio-insights-collapse .navbar-nav > li > a:hover,
+      #portfolio-insights-collapse .navbar-nav > li.active > a {
+        color: #3498db !important;
+        border-bottom: 2px solid #3498db !important;
+      }
+    }
+    </style>
+
 </head>
 <body>
 
@@ -636,6 +690,42 @@
     <script src="assets/js/jquery.countTo.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="assets/js/script.js"></script>
+    <script id="mobile-menu-script">
+    document.addEventListener('DOMContentLoaded', function() {
+      // Simple mobile menu toggle
+      var toggleButton = document.querySelector('.navbar-toggle');
+      var mobileMenu = document.getElementById('portfolio-insights-collapse');
+      
+      if (toggleButton && mobileMenu) {
+        // Mobile toggle button click
+        toggleButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          if (mobileMenu.classList.contains('menu-visible')) {
+            mobileMenu.classList.remove('menu-visible');
+          } else {
+            mobileMenu.classList.add('menu-visible');
+          }
+        });
+        
+        // Close menu when clicking a menu item
+        var menuItems = mobileMenu.querySelectorAll('.navbar-nav li a');
+        for (var i = 0; i < menuItems.length; i++) {
+          menuItems[i].addEventListener('click', function() {
+            mobileMenu.classList.remove('menu-visible');
+          });
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!e.target.closest('.navbar-toggle') && !e.target.closest('#portfolio-insights-collapse')) {
+            mobileMenu.classList.remove('menu-visible');
+          }
+        });
+      }
+    });
+    </script>
     <script>
       // Dark Mode Toggle Functionality
       const toggleSwitch = document.querySelector('#checkbox');

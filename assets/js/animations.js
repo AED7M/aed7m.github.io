@@ -214,3 +214,45 @@ document.addEventListener('DOMContentLoaded', function() {
     initTechSkills();
     initPortfolioCards();
 });
+
+/* Mobile menu simple solution */
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileToggle = document.querySelector('.navbar-toggle');
+  const mobileMenu = document.getElementById('portfolio-insights-collapse');
+  
+  if (mobileToggle && mobileMenu) {
+    // Toggle menu visibility on click
+    mobileToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      mobileMenu.classList.toggle('menu-visible');
+    });
+    
+    // Create direct DOM menu if needed
+    if (!mobileMenu.querySelector('.navbar-nav li')) {
+      const menuHTML = `
+        <ul class="nav navbar-nav">
+          <li class="page-scroll"><a href="#hero">Home</a></li>
+          <li class="page-scroll"><a href="#services">Services</a></li>
+          <li class="page-scroll"><a href="#portfolio">Portfolio</a></li>
+          <li class="page-scroll"><a href="#contact">Contact</a></li>
+        </ul>
+      `;
+      mobileMenu.innerHTML = menuHTML;
+    }
+    
+    // Close menu when clicking menu items
+    const menuLinks = mobileMenu.querySelectorAll('a');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('menu-visible');
+      });
+    });
+    
+    // Close when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!mobileToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('menu-visible');
+      }
+    });
+  }
+});
