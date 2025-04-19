@@ -272,6 +272,21 @@
         transform: scale(1.1);
     }
 
+    #pure-mobile-social {
+        margin-top: 20px;
+    }
+
+    #pure-mobile-social a {
+        margin: 0 10px;
+        color: white;
+        font-size: 24px;
+        transition: color 0.3s ease;
+    }
+
+    #pure-mobile-social a:hover {
+        color: #3498db;
+    }
+
     @media (min-width: 768px) {
         #pure-mobile-menu {
             display: none !important;
@@ -341,6 +356,11 @@
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div id="pure-mobile-social">
+                <a href="https://github.com/AED7M" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/abdelrahmanelaref" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:alarfb2@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
         </div>
     </div>
 
@@ -1130,7 +1150,7 @@
           mobileMenuOverlay.addEventListener('click', function(e) {
               if (e.target === mobileMenuOverlay) {
                   mobileMenuOverlay.classList.remove('active');
-              }
+              });
           });
       });
     </script>

@@ -37,7 +37,3 @@ Feel free to reach out to me for job opportunities or project collaborations:
 - Email: alarfb2@gmail.com
 - LinkedIn: [linkedin.com/in/abdelrahmanelaref](https://linkedin.com/in/abdelrahmanelaref)
 - GitHub: [github.com/AED7M](https://github.com/AED7M)
-
-## License
-
-This project is available for viewing and inspiration, but please contact me before using any portions of the code or design.
