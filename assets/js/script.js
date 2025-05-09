@@ -277,6 +277,78 @@ function initializeTypingAnimation() {
     typeText();
 }
 
+// Enhanced Portfolio Section Functionality
+function initializePortfolioEnhancements() {
+    // Project filtering
+    $('.filter-btn').on('click', function() {
+        // Remove active class from all buttons
+        $('.filter-btn').removeClass('active');
+        // Add active class to clicked button
+        $(this).addClass('active');
+        
+        // Get filter value
+        const filterValue = $(this).data('filter');
+        
+        // Filter projects
+        if (filterValue === 'all') {
+            $('.project-item').show();
+        } else {
+            $('.project-item').each(function() {
+                const categories = $(this).data('category');
+                if (categories && categories.indexOf(filterValue) !== -1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    });
+    
+    // Project modal tabs
+    $('.project-tab').on('click', function() {
+        const tabId = $(this).data('tab');
+        
+        // Remove active class from all tabs and panes in this modal
+        $(this).closest('.modal-body').find('.project-tab').removeClass('active');
+        $(this).closest('.modal-body').find('.tab-pane').removeClass('active');
+        
+        // Add active class to clicked tab and corresponding pane
+        $(this).addClass('active');
+        $('#' + tabId + '-tab').addClass('active');
+    });
+    
+    // Video demo button click
+    $('.video-demo-btn').on('click', function() {
+        const tabId = $(this).data('tab');
+        $(this).closest('.modal-body').find('.project-tab[data-tab="' + tabId + '"]').click();
+    });
+    
+    // Back to overview button click
+    $('.back-to-overview').on('click', function() {
+        const tabId = $(this).data('tab');
+        $(this).closest('.modal-body').find('.project-tab[data-tab="' + tabId + '"]').click();
+    });
+    
+    // Handle video trigger from project card
+    $('.project-modal').on('show.bs.modal', function(event) {
+        const button = $(event.relatedTarget);
+        
+        // If button has data-video attribute, auto-switch to video tab
+        if (button.data('video') === true) {
+            const modal = this;
+            setTimeout(function() {
+                $(modal).find('.project-tab[data-tab="video"]').click();
+            }, 300);
+        }
+    });
+    
+    // Gallery item click (for future implementation)
+    $('.gallery-item').on('click', function() {
+        const imgSrc = $(this).find('img').attr('src');
+        // Implement image preview functionality if needed
+    });
+}
+
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize dark mode
@@ -473,4 +545,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Listen for scroll
         window.addEventListener('scroll', updateMobileHeader);
     }
+
+    // Initialize portfolio enhancements
+    initializePortfolioEnhancements();
 });

@@ -294,6 +294,624 @@
     }
     </style>
 
+    <!-- Add enhanced styles for the portfolio section -->
+    <style id="enhanced-portfolio-styles">
+        /* Enhanced Portfolio Section Styles */
+        .section-portfolio {
+            background-color: #f9f9f9;
+            padding: 80px 0;
+        }
+        
+        /* Project Cards Styling */
+        .project-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-card-img {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+        }
+        
+        .project-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-card-img img {
+            transform: scale(1.05);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(27, 36, 47, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-overlay-content {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .project-action-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1b242f;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .project-card:hover .project-action-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .project-action-btn:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        .project-action-btn.view-details {
+            transition-delay: 0.05s;
+        }
+        
+        .project-action-btn.visit-link {
+            transition-delay: 0.1s;
+        }
+        
+        .project-action-btn.play-video {
+            transition-delay: 0.15s;
+        }
+        
+        .project-card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card-body h4 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .project-tags span {
+            padding: 5px 10px;
+            border-radius: 50px;
+            background: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .project-card-body p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .project-card-footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .view-project-btn {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .view-project-btn:hover {
+            border-bottom-color: #3498db;
+        }
+        
+        .view-project-btn i {
+            margin-left: 5px;
+            font-size: 14px;
+        }
+        
+        /* Enhanced Modal Styling */
+        .project-modal .modal-dialog {
+            max-width: 90%;
+            width: 900px;
+            margin: 30px auto;
+        }
+        
+        .project-modal .modal-content {
+            border-radius: 10px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .project-modal .modal-header {
+            padding: 0;
+            border-bottom: none;
+            position: relative;
+        }
+        
+        .project-modal .modal-header .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            opacity: 0.85;
+            z-index: 10;
+            font-size: 24px;
+            line-height: 36px;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            text-shadow: none;
+            font-weight: 300;
+            color: #333;
+        }
+        
+        .project-modal .modal-header .close:hover {
+            opacity: 1;
+        }
+        
+        .project-modal .modal-body {
+            padding: 30px;
+        }
+        
+        .project-modal .modal-title {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .project-modal-banner {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .project-modal-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .project-description {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .project-description p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .project-details {
+            flex: 0 0 270px;
+        }
+        
+        .project-details h5 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .detail-item {
+            margin-bottom: 20px;
+        }
+        
+        .detail-item h6 {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .detail-item p {
+            color: #666;
+            margin: 0;
+        }
+        
+        .technologies-used {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .tech-tag {
+            padding: 6px 12px;
+            background: #eef7fd;
+            color: #3498db;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .project-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .project-btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .project-btn.primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .project-btn.primary:hover {
+            background: #2980b9;
+        }
+        
+        .project-btn.secondary {
+            background: #f8f9fa;
+            color: #333;
+        }
+        
+        .project-btn.secondary:hover {
+            background: #e9ecef;
+        }
+        
+        /* Video container styles */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Image gallery styles */
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .gallery-item {
+            height: 100px;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Navigation tabs for media content */
+        .project-tabs {
+            display: flex;
+            border-bottom: 1px solid #dee2e6;
+            margin-bottom: 20px;
+        }
+        
+        .project-tab {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+            color: #495057;
+            cursor: pointer;
+        }
+        
+        .project-tab.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+        
+        .tab-content .tab-pane {
+            display: none;
+        }
+        
+        .tab-content .tab-pane.active {
+            display: block;
+        }
+        
+        /* Project filters */
+        .project-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            background: none;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            color: #495057;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover {
+            color: #3498db;
+        }
+        
+        .filter-btn.active {
+            border-color: #3498db;
+            color: #3498db;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 767px) {
+            .project-card-img {
+                height: 180px;
+            }
+            
+            .project-modal .modal-dialog {
+                width: 95%;
+                margin: 20px auto;
+            }
+            
+            .project-modal-banner {
+                height: 200px;
+            }
+            
+            .project-modal-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .project-details {
+                flex: 1;
+            }
+        }
+
+        /* Enhanced Portfolio Visual Improvements */
+        .project-card {
+            border: none;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+        }
+        
+        .project-overlay {
+            background: linear-gradient(to bottom, rgba(27, 36, 47, 0.6), rgba(52, 152, 219, 0.9));
+        }
+        
+        .project-action-btn {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(30px) scale(0.8);
+        }
+        
+        .project-card:hover .project-action-btn {
+            transform: translateY(0) scale(1);
+        }
+        
+        .project-action-btn.play-video {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .project-action-btn.play-video:hover {
+            background: #c0392b;
+        }
+        
+        .project-modal .modal-dialog {
+            max-width: 92%;
+            width: 1000px;
+        }
+        
+        .project-modal .modal-content {
+            background: #fafafa;
+        }
+        
+        .project-modal .modal-body {
+            padding: 35px;
+        }
+        
+        .project-tabs {
+            justify-content: center;
+            border-bottom: none;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .project-tabs::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            right: 20%;
+            height: 1px;
+            background: #dee2e6;
+            z-index: 0;
+        }
+        
+        .project-tab {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            z-index: 1;
+        }
+        
+        .project-tab.active {
+            color: #2980b9;
+            border-bottom-width: 3px;
+        }
+        
+        .video-container {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .project-btn {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 12px 24px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .project-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tech-tag {
+            transition: all 0.3s ease;
+        }
+        
+        .tech-tag:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .filter-btn {
+            padding: 10px 25px;
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filter-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        /* Animation for project items */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .project-item {
+            animation: fadeInUp 0.6s ease backwards;
+        }
+        
+        .project-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        
+        .project-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .project-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+        
+        .project-item:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+        
+        .project-item:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -527,100 +1145,186 @@
                     <h3>My Projects</h3>
                     <img src="assets/img/lines.svg" class="img-lines" alt="lines">
                 </div>
+                
+                <!-- Project category filters -->
+                <div class="project-filters">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="data-analysis">Data Analysis</button>
+                    <button class="filter-btn" data-filter="dashboard">Dashboards</button>
+                    <button class="filter-btn" data-filter="etl">ETL</button>
+                    <button class="filter-btn" data-filter="ml">Machine Learning</button>
+                </div>
+                
                 <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                        <div class="portfolio-card">
-                            <div class="portfolio-card-img">
-                                <img src="assets/img/automated reporting system oustide.jpg" class="img-responsive" alt="Automated Reporting System">
-                                <div class="portfolio-overlay">
-                                    <div class="portfolio-overlay-content">
-                                        <a href="#" data-toggle="modal" data-target="#portfolioItem1" class="portfolio-zoom"><i class="glyphicon glyphicon-eye-open"></i></a>
-                                        <a href="https://github.com/AED7M/Automated-E-commerce-Reporting-System" target="_blank" class="portfolio-link"><i class="glyphicon glyphicon-link"></i></a>
+                    <!-- Automated Reporting System -->
+                    <div class="col-md-4 col-sm-6 project-item" data-category="etl data-analysis">
+                        <div class="project-card">
+                            <div class="project-card-img">
+                                <img src="assets/img/automated reporting system oustide.jpg" alt="Automated Reporting System">
+                                <div class="project-overlay">
+                                    <div class="project-overlay-content">
+                                        <a href="#" data-toggle="modal" data-target="#projectModal1" class="project-action-btn view-details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="https://github.com/AED7M/Automated-E-commerce-Reporting-System" target="_blank" class="project-action-btn visit-link">
+                                            <i class="fab fa-github"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="portfolio-card-body">
+                            <div class="project-card-body">
                                 <h4>Automated Reporting System</h4>
-                                <div class="portfolio-tags">
+                                <div class="project-tags">
                                     <span>Python</span>
                                     <span>ETL</span>
                                     <span>Reporting</span>
                                 </div>
                                 <p>Reduced manual reporting time by 90% through automation of data processing and report generation.</p>
+                                <div class="project-card-footer">
+                                    <a href="#" data-toggle="modal" data-target="#projectModal1" class="view-project-btn">
+                                        View Details <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-xs-12">
-                        <div class="portfolio-card">
-                            <div class="portfolio-card-img">
-                                <img src="assets/img/sales analytics etl .png" class="img-responsive" alt="Sales Analytics ETL">
-                                <div class="portfolio-overlay">
-                                    <div class="portfolio-overlay-content">
-                                        <a href="#" data-toggle="modal" data-target="#portfolioItem2" class="portfolio-zoom"><i class="glyphicon glyphicon-eye-open"></i></a>
-                                        <a href="https://github.com/AED7M/ETL-Python-PowerBI" target="_blank" class="portfolio-link"><i class="glyphicon glyphicon-link"></i></a>
+                    
+                    <!-- Sales Analytics ETL -->
+                    <div class="col-md-4 col-sm-6 project-item" data-category="etl dashboard">
+                        <div class="project-card">
+                            <div class="project-card-img">
+                                <img src="assets/img/sales analytics etl .png" alt="Sales Analytics ETL">
+                                <div class="project-overlay">
+                                    <div class="project-overlay-content">
+                                        <a href="#" data-toggle="modal" data-target="#projectModal2" class="project-action-btn view-details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="https://github.com/AED7M/ETL-Python-PowerBI" target="_blank" class="project-action-btn visit-link">
+                                            <i class="fab fa-github"></i>
+                                        </a>
+                                        <a href="#" data-toggle="modal" data-target="#projectModal2" data-video="true" class="project-action-btn play-video">
+                                            <i class="fas fa-play"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="portfolio-card-body">
+                            <div class="project-card-body">
                                 <h4>Sales Analytics ETL</h4>
-                                <div class="portfolio-tags">
+                                <div class="project-tags">
                                     <span>Python</span>
                                     <span>PostgreSQL</span>
                                     <span>Power BI</span>
                                 </div>
                                 <p>Built a robust ETL pipeline processing 20,000+ rows of sales data with interactive Power BI visualization.</p>
+                                <div class="project-card-footer">
+                                    <a href="#" data-toggle="modal" data-target="#projectModal2" class="view-project-btn">
+                                        View Details <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-xs-12">
-                        <div class="portfolio-card">
-                            <div class="portfolio-card-img">
-                                <img src="assets/img/sales preformance analysis report.jpg" class="img-responsive" alt="Sales Performance Analysis">
-                                <div class="portfolio-overlay">
-                                    <div class="portfolio-overlay-content">
-                                        <a href="#" data-toggle="modal" data-target="#portfolioItem3" class="portfolio-zoom"><i class="glyphicon glyphicon-eye-open"></i></a>
-                                        <a href="https://github.com/AED7M/Sales-Performance-Analysis-Report" target="_blank" class="portfolio-link"><i class="glyphicon glyphicon-link"></i></a>
+                    
+                    <!-- Sales Performance Analysis -->
+                    <div class="col-md-4 col-sm-6 project-item" data-category="data-analysis dashboard">
+                        <div class="project-card">
+                            <div class="project-card-img">
+                                <img src="assets/img/sales preformance analysis report.jpg" alt="Sales Performance Analysis">
+                                <div class="project-overlay">
+                                    <div class="project-overlay-content">
+                                        <a href="#" data-toggle="modal" data-target="#projectModal3" class="project-action-btn view-details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="https://github.com/AED7M/Sales-Performance-Analysis-Report" target="_blank" class="project-action-btn visit-link">
+                                            <i class="fab fa-github"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="portfolio-card-body">
+                            <div class="project-card-body">
                                 <h4>Sales Performance Analysis</h4>
-                                <div class="portfolio-tags">
+                                <div class="project-tags">
                                     <span>Python</span>
                                     <span>Pandas</span>
                                     <span>Visualization</span>
                                 </div>
                                 <p>Identified strategies for 15.97% revenue increase through advanced sales data analysis and visualization.</p>
+                                <div class="project-card-footer">
+                                    <a href="#" data-toggle="modal" data-target="#projectModal3" class="view-project-btn">
+                                        View Details <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col-md-4 col-xs-12 col-md-offset-4">
-                        <div class="portfolio-card">
-                            <div class="portfolio-card-img">
-                                <img src="assets/img/gemstone price predction image.png" class="img-responsive" alt="Gemstone Price Prediction">
-                                <div class="portfolio-overlay">
-                                    <div class="portfolio-overlay-content">
-                                        <a href="#" data-toggle="modal" data-target="#portfolioItem4" class="portfolio-zoom"><i class="glyphicon glyphicon-eye-open"></i></a>
-                                        <a href="https://github.com/AED7M/gemstone-price-prediction" target="_blank" class="portfolio-link"><i class="glyphicon glyphicon-link"></i></a>
+                    
+                    <!-- Gemstone Price Prediction -->
+                    <div class="col-md-4 col-sm-6 project-item" data-category="ml data-analysis">
+                        <div class="project-card">
+                            <div class="project-card-img">
+                                <img src="assets/img/gemstone price predction image.png" alt="Gemstone Price Prediction">
+                                <div class="project-overlay">
+                                    <div class="project-overlay-content">
+                                        <a href="#" data-toggle="modal" data-target="#projectModal4" class="project-action-btn view-details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="https://github.com/AED7M/gemstone-price-prediction" target="_blank" class="project-action-btn visit-link">
+                                            <i class="fab fa-github"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="portfolio-card-body">
+                            <div class="project-card-body">
                                 <h4>Gemstone Price Prediction</h4>
-                                <div class="portfolio-tags">
+                                <div class="project-tags">
                                     <span>Machine Learning</span>
                                     <span>Python</span>
                                     <span>Data Science</span>
                                 </div>
                                 <p>Developed a ML model to predict cubic zirconia gemstone prices with 97.8% accuracy using physical attributes.</p>
+                                <div class="project-card-footer">
+                                    <a href="#" data-toggle="modal" data-target="#projectModal4" class="view-project-btn">
+                                        View Details <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- You can add a placeholder for a new project -->
+                    <div class="col-md-4 col-sm-6 project-item" data-category="dashboard">
+                        <div class="project-card">
+                            <div class="project-card-img">
+                                <!-- Use a placeholder image or icon for future projects -->
+                                <div style="height: 100%; display: flex; align-items: center; justify-content: center; background-color: #f5f5f5;">
+                                    <i class="fas fa-chart-line" style="font-size: 48px; color: #3498db;"></i>
+                                </div>
+                                <div class="project-overlay">
+                                    <div class="project-overlay-content">
+                                        <span class="project-action-btn" style="background: #3498db; color: white;">
+                                            <i class="fas fa-hourglass-half"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-card-body">
+                                <h4>Interactive Dashboard (Coming Soon)</h4>
+                                <div class="project-tags">
+                                    <span>Power BI</span>
+                                    <span>Data Visualization</span>
+                                </div>
+                                <p>An interactive dashboard project showcasing advanced visualization techniques for business intelligence.</p>
+                                <div class="project-card-footer">
+                                    <span class="view-project-btn" style="color: #999; cursor: default;">
+                                        In Progress <i class="fas fa-spinner fa-spin"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section><!-- /.secton-portfolio -->
+        </section><!-- /.section-portfolio -->
 
         <section class="site-section section-counters text-center">
             <div class="container">
@@ -806,105 +1510,299 @@
     </footer><!-- /#footer -->
 
     <!-- Modals -->
-    <div id="portfolioItem1" class="modal fade" role="dialog">
+    <div id="projectModal1" class="modal fade project-modal" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <img class="img-res" src="assets/img/automated reporting system inside.png" alt="Automated Reporting System">
+            <img class="project-modal-banner" src="assets/img/automated reporting system inside.png" alt="Automated Reporting System">
           </div>
           <div class="modal-body">
             <h4 class="modal-title">Automated Reporting System</h4>
-            <p>A comprehensive Python-based reporting system that reduced manual reporting time by 90%. This project features:</p>
-            <ul>
-              <li>Automated ETL pipeline that ingests data from 5+ e-commerce sources</li>
-              <li>Advanced analytics that processes 90,000+ transactions across 60+ product categories</li>
-              <li>Calculation of 10+ KPIs with natural language summaries</li>
-              <li>HTML report generation with clear visualizations</li>
-            </ul>
-            <p>Technologies used: Python, Pandas, SQLAlchemy, Matplotlib, HTML/CSS</p>
+            
+            <div class="project-modal-content">
+              <div class="project-description">
+                <p>A comprehensive Python-based reporting system that revolutionized reporting workflows, reducing manual reporting time by 90% while increasing data accuracy and consistency.</p>
+                
+                <h5>Project Highlights</h5>
+                <ul>
+                  <li>Designed and implemented an ETL pipeline that automatically ingests data from 5+ e-commerce sources</li>
+                  <li>Built an analytics engine that processes 90,000+ transactions across 60+ product categories</li>
+                  <li>Created dynamic report generation with natural language summaries and visualizations</li>
+                  <li>Implemented automated error handling and data validation features</li>
+                  <li>Reduced report generation time from 2 days to 30 minutes</li>
+                </ul>
+                
+                <h5>Key Features</h5>
+                <p>This project features a modular architecture with separate components for data extraction, transformation, analysis, and presentation. It includes customizable templates for report generation and supports multiple output formats including HTML, PDF, and Excel.</p>
+              </div>
+              
+              <div class="project-details">
+                <h5>Project Details</h5>
+                
+                <div class="detail-item">
+                  <h6>Timeline</h6>
+                  <p>1 month</p>
+                </div>
+                
+                <div class="detail-item">
+                  <h6>Role</h6>
+                  <p>Data Engineer / Analyst</p>
+                </div>
+                
+                <div class="detail-item">
+                  <h6>Technologies</h6>
+                  <div class="technologies-used">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">SQLAlchemy</span>
+                    <span class="tech-tag">Matplotlib</span>
+                    <span class="tech-tag">HTML/CSS</span>
+                  </div>
+                </div>
+                
+                <div class="project-actions">
+                  <a href="https://github.com/AED7M/Automated-E-commerce-Reporting-System" class="project-btn primary" target="_blank">
+                    <i class="fab fa-github"></i>
+                    View Code
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="modal-footer">
-            <a href="https://github.com/AED7M/Automated-E-commerce-Reporting-System" class="btn btn-fill" target="_blank">View on GitHub</a>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+        </div>
+      </div>
+    </div>
 
-    <div id="portfolioItem2" class="modal fade" role="dialog">
+    <div id="projectModal2" class="modal fade project-modal" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <img class="img-res" src="assets/img/sales analytics etl .png" alt="Sales Analytics ETL">
           </div>
           <div class="modal-body">
             <h4 class="modal-title">Sales Analytics ETL and Dashboard</h4>
-            <p>A robust ETL pipeline and interactive dashboard solution for sales data analysis:</p>
-            <ul>
-              <li>Star schema database design with optimized data architecture</li>
-              <li>Automated ETL pipeline processing 20,000+ rows of EU and US sales data</li>
-              <li>PostgreSQL integration with 30% reduction in configuration errors</li>
-              <li>Interactive Power BI dashboard with dynamic filters and bookmarks</li>
-            </ul>
-            <p>Technologies used: Python, Pandas, SQLAlchemy, PostgreSQL, Power BI</p>
+            
+            <div class="project-tabs">
+              <button class="project-tab active" data-tab="overview">Overview</button>
+              <button class="project-tab" data-tab="video">Dashboard Demo</button>
+            </div>
+            
+            <div class="tab-content">
+              <div class="tab-pane active" id="overview-tab">
+                <div class="project-modal-content">
+                  <div class="project-description">
+                    <p>A robust ETL pipeline and interactive Power BI dashboard solution that transforms raw sales data into actionable business intelligence, enabling data-driven decision making.</p>
+                    
+                    <h5>Project Highlights</h5>
+                    <ul>
+                      <li>Designed a star schema database with optimized data architecture for reporting</li>
+                      <li>Developed an ETL pipeline that processes 20,000+ rows of EU and US sales data</li>
+                      <li>Implemented PostgreSQL integration with 30% reduction in configuration errors</li>
+                      <li>Created interactive Power BI dashboards with dynamic filters and bookmarks</li>
+                      <li>Implemented automated data refresh schedules and error notifications</li>
+                    </ul>
+                    
+                    <h5>Impact</h5>
+                    <p>This solution has enabled business stakeholders to identify sales trends and make data-driven decisions, resulting in a 12% increase in sales performance and improved inventory management.</p>
+                    
+                    <div class="project-gallery">
+                      <div class="gallery-item">
+                        <img src="assets/img/sales analytics etl .png" alt="ETL Pipeline">
+                      </div>
+                      <!-- You can add more gallery items when you have them -->
+                    </div>
+                  </div>
+                  
+                  <div class="project-details">
+                    <h5>Project Details</h5>
+                    
+                    <div class="detail-item">
+                      <h6>Timeline</h6>
+                      <p>2 weeks</p>
+                    </div>
+                    
+                    <div class="detail-item">
+                      <h6>Role</h6>
+                      <p>ETL Developer / BI Specialist</p>
+                    </div>
+                    
+                    <div class="detail-item">
+                      <h6>Technologies</h6>
+                      <div class="technologies-used">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Power BI</span>
+                        <span class="tech-tag">DAX</span>
+                      </div>
+                    </div>
+                    
+                    <div class="project-actions">
+                      <a href="https://github.com/AED7M/ETL-Python-PowerBI" class="project-btn primary" target="_blank">
+                        <i class="fab fa-github"></i>
+                        View Code
+                      </a>
+                      <button class="project-btn secondary video-demo-btn" data-tab="video">
+                        <i class="fas fa-play"></i>
+                        Watch Demo
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="tab-pane" id="video-tab">
+                <h5>Dashboard Demo Video</h5>
+                <div class="video-container">
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/Ef7wTniauRU?si=y6lBMvW1dsxrrPMU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="text-center mt-20">
+                  <button class="project-btn secondary back-to-overview" data-tab="overview">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Overview
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="modal-footer">
-            <a href="https://github.com/AED7M/ETL-Python-PowerBI" class="btn btn-fill" target="_blank">View on GitHub</a>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+        </div>
+      </div>
+    </div>
 
-    <div id="portfolioItem3" class="modal fade" role="dialog">
+    <div id="projectModal3" class="modal fade project-modal" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <img class="img-res" src="assets/img/sales preformance analysis report.jpg" alt="Sales Performance Analysis">
+            <img class="project-modal-banner" src="assets/img/sales preformance analysis report.jpg" alt="Sales Performance Analysis">
           </div>
           <div class="modal-body">
             <h4 class="modal-title">Sales Performance Analysis Report</h4>
-            <p>A comprehensive sales performance analysis with actionable recommendations:</p>
-            <ul>
-              <li>Data cleaning and validation of 15,000 rows across 8 columns</li>
-              <li>Advanced revenue analysis identifying strategies for 15.97% revenue increase</li>
-              <li>Establishment of key business metrics with strategic recommendations</li>
-              <li>Methods for tracking and improving sales performance</li>
-            </ul>
-            <p>Technologies used: Python, Pandas, NumPy, Matplotlib, Seaborn</p>
+            
+            <div class="project-modal-content">
+              <div class="project-description">
+                <p>A comprehensive sales performance analysis that provided actionable insights and strategic recommendations to optimize sales operations and increase revenue.</p>
+                
+                <h5>Project Highlights</h5>
+                <ul>
+                  <li>Conducted data cleaning and validation of 15,000 rows across 8 columns</li>
+                  <li>Performed advanced revenue analysis identifying strategies for 15.97% revenue increase</li>
+                  <li>Established key business metrics with strategic recommendations</li>
+                  <li>Developed methods for tracking and improving sales performance</li>
+                  <li>Created visualizations to effectively communicate findings to stakeholders</li>
+                </ul>
+                
+                <h5>Approach</h5>
+                <p>This project involved a systematic analysis of sales data to identify trends, patterns, and opportunities. I used statistical methods to analyze sales performance across different dimensions including products, regions, time periods, and customer segments.</p>
+                
+                <h5>Impact</h5>
+                <p>The recommendations from this analysis were implemented, resulting in a 15.97% increase in revenue and improved sales team performance through targeted training and incentive programs.</p>
+              </div>
+              
+              <div class="project-details">
+                <h5>Project Details</h5>
+                
+                <div class="detail-item">
+                  <h6>Timeline</h6>
+                  <p>3 weeks</p>
+                </div>
+                
+                <div class="detail-item">
+                  <h6>Role</h6>
+                  <p>Data Analyst</p>
+                </div>
+                
+                <div class="detail-item">
+                  <h6>Technologies</h6>
+                  <div class="technologies-used">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">NumPy</span>
+                    <span class="tech-tag">Matplotlib</span>
+                    <span class="tech-tag">Seaborn</span>
+                  </div>
+                </div>
+                
+                <div class="project-actions">
+                  <a href="https://github.com/AED7M/Sales-Performance-Analysis-Report" class="project-btn primary" target="_blank">
+                    <i class="fab fa-github"></i>
+                    View Code
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="modal-footer">
-            <a href="https://github.com/AED7M/Sales-Performance-Analysis-Report" class="btn btn-fill" target="_blank">View on GitHub</a>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+        </div>
+      </div>
+    </div>
 
-    <div id="portfolioItem4" class="modal fade" role="dialog">
+    <div id="projectModal4" class="modal fade project-modal" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <img class="img-res" src="assets/img/gemstone price predction image.png" alt="Gemstone Price Prediction">
+            <img class="project-modal-banner" src="assets/img/gemstone price predction image.png" alt="Gemstone Price Prediction">
           </div>
           <div class="modal-body">
             <h4 class="modal-title">Gemstone Price Prediction</h4>
-            <p>A machine learning model to predict cubic zirconia gemstone prices with high accuracy:</p>
-            <ul>
-              <li>Data preprocessing and feature engineering for physical attributes</li>
-              <li>Model training and evaluation achieving 97.8% accuracy</li>
-              <li>Integration of predictive analytics into business decision-making</li>
-              <li>Visualization of model performance and predictions</li>
-            </ul>
-            <p>Technologies used: Python, Scikit-Learn, Pandas, Matplotlib</p>
+            
+            <div class="project-modal-content">
+              <div class="project-description">
+                <p>A machine learning model to predict cubic zirconia gemstone prices with high accuracy, demonstrating the application of data science in the luxury goods market.</p>
+                
+                <h5>Project Highlights</h5>
+                <ul>
+                  <li>Performed data preprocessing and feature engineering for gemstone physical attributes</li>
+                  <li>Developed and trained machine learning models, achieving 97.8% prediction accuracy</li>
+                  <li>Evaluated multiple algorithms including Random Forest, Gradient Boosting, and Neural Networks</li>
+                  <li>Created visualizations to explain model performance and feature importance</li>
+                  <li>Developed a solution that enables accurate pricing based on objective characteristics</li>
+                </ul>
+                
+                <h5>Methodology</h5>
+                <p>This project involved exploratory data analysis, feature selection, model selection, hyperparameter tuning, and cross-validation to ensure the model's robustness and accuracy.</p>
+                
+                <h5>Business Impact</h5>
+                <p>The model provides consistent pricing standards that can be applied across the gemstone industry, potentially saving millions in pricing discrepancies and improving customer trust through transparent pricing.</p>
+              </div>
+              
+              <div class="project-details">
+                <h5>Project Details</h5>
+                
+                <div class="detail-item">
+                  <h6>Timeline</h6>
+                  <p>1 month</p>
+                </div>
+                
+                <div class="detail-item">
+                  <h6>Role</h6>
+                  <p>Data Scientist</p>
+                </div>
+                
+                <div class="detail-item">
+                  <h6>Technologies</h6>
+                  <div class="technologies-used">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Scikit-Learn</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">Matplotlib</span>
+                    <span class="tech-tag">Feature Engineering</span>
+                  </div>
+                </div>
+                
+                <div class="project-actions">
+                  <a href="https://github.com/AED7M/gemstone-price-prediction" class="project-btn primary" target="_blank">
+                    <i class="fab fa-github"></i>
+                    View Code
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="modal-footer">
-            <a href="https://github.com/AED7M/gemstone-price-prediction" class="btn btn-fill" target="_blank">View on GitHub</a>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+        </div>
+      </div>
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

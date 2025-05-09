@@ -263,6 +263,177 @@
         color: #3498db;
         border-bottom: 2px solid #3498db;
     }
+
+    /* Enhanced Portfolio Mobile Responsiveness */
+    @media only screen and (max-width: 767px) {
+        /* Project section overall adjustments */
+        .section-portfolio {
+            padding: 60px 0 40px;
+        }
+        
+        /* Project filters mobile adjustments */
+        .project-filters {
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            gap: 8px;
+        }
+        
+        .filter-btn {
+            padding: 8px 15px;
+            font-size: 13px;
+            width: calc(50% - 8px);
+            text-align: center;
+        }
+        
+        /* Project cards mobile adjustments */
+        .project-card {
+            margin-bottom: 25px;
+        }
+        
+        .project-card-img {
+            height: 180px;
+        }
+        
+        .project-action-btn {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            width: 40px;
+            height: 40px;
+        }
+        
+        .project-overlay {
+            opacity: 0.9;
+            background: linear-gradient(to bottom, rgba(27, 36, 47, 0.7), rgba(52, 152, 219, 0.85));
+        }
+        
+        .project-card-body {
+            padding: 15px;
+        }
+        
+        .project-card-body h4 {
+            font-size: 16px;
+        }
+        
+        .project-tags span {
+            font-size: 11px;
+            padding: 4px 8px;
+        }
+        
+        .project-card-body p {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        
+        /* Project modals mobile adjustments */
+        .project-modal .modal-dialog {
+            width: 95%;
+            margin: 15px auto;
+        }
+        
+        .project-modal .modal-body {
+            padding: 20px 15px;
+        }
+        
+        .project-modal-banner {
+            height: 200px;
+        }
+        
+        .project-modal .modal-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .project-modal-content {
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .project-description h5 {
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        .project-description p, 
+        .project-description li {
+            font-size: 14px;
+        }
+        
+        .project-details {
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Tab navigation for modals */
+        .project-tabs {
+            margin-bottom: 20px;
+            justify-content: space-between;
+        }
+        
+        .project-tab {
+            padding: 10px;
+            font-size: 14px;
+            flex: 1;
+            text-align: center;
+        }
+        
+        /* Video container adjustments */
+        .video-container {
+            margin-bottom: 15px;
+        }
+        
+        /* Action buttons */
+        .project-actions {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .project-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 10px;
+        }
+    }
+    
+    /* Extra small devices adjustments */
+    @media only screen and (max-width: 479px) {
+        .project-filters {
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        
+        .project-card-img {
+            height: 160px;
+        }
+        
+        .project-action-btn {
+            width: 36px;
+            height: 36px;
+            font-size: 14px;
+        }
+        
+        .project-overlay-content {
+            gap: 10px;
+        }
+        
+        .project-modal .modal-dialog {
+            width: 100%;
+            margin: 0;
+            border-radius: 0;
+        }
+        
+        .project-modal .modal-content {
+            border-radius: 0;
+        }
+        
+        .project-tabs::after {
+            left: 5%;
+            right: 5%;
+        }
+    }
 }
 
 /* Large Devices, Wide Screens */
