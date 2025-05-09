@@ -41,6 +41,9 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/responsive.css" rel="stylesheet">
 
+    <!-- Animation styles -->
+    <link href="assets/css/animations.css" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -2092,6 +2095,65 @@
             });
         });
     });
+    </script>
+    <!-- Script to apply scroll animations to sections -->
+    <script src="assets/js/animations.js"></script>
+    
+    <script>
+        // Apply animation classes to elements after DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation classes to section titles
+            document.querySelectorAll('.site-section h3').forEach(title => {
+                title.classList.add('section-title-animation', 'animate');
+            });
+            
+            // Add animation to section divider lines
+            document.querySelectorAll('.img-lines').forEach(line => {
+                line.classList.add('animate', 'fade-in-up', 'delay-100');
+            });
+            
+            // Add card-reveal animation to all cards
+            document.querySelectorAll('.skill-card, .service-card, .project-card, .education-card, .contact-card').forEach(card => {
+                card.classList.add('card-reveal');
+            });
+            
+            // Add staggered animation to card containers
+            document.querySelectorAll('.skills-container, .row:has(.service-card), .row:has(.project-item), .row:has(.education-card), .row:has(.contact-card)').forEach(container => {
+                container.classList.add('stagger-children', 'animate');
+            });
+            
+            // Add section transition effect to main sections
+            document.querySelectorAll('.site-section').forEach(section => {
+                section.classList.add('section-transition');
+            });
+            
+            // Add fading animations to counters
+            document.querySelectorAll('.counter-card').forEach(counter => {
+                counter.classList.add('animate', 'scale-up');
+            });
+            
+            // Add animations to hero content
+            if (document.querySelector('.hero-text-container h1')) {
+                document.querySelector('.hero-text-container h1').classList.add('animate', 'fade-in-up');
+            }
+            
+            if (document.querySelector('.job-title-container')) {
+                document.querySelector('.job-title-container').classList.add('animate', 'fade-in-up', 'delay-200');
+            }
+            
+            if (document.querySelector('.hero-buttons')) {
+                document.querySelector('.hero-buttons').classList.add('stagger-children', 'animate', 'delay-300');
+            }
+            
+            if (document.querySelector('.hero-card')) {
+                document.querySelector('.hero-card').classList.add('animate', 'fade-in-right', 'delay-400');
+            }
+            
+            // Initialize animation observer
+            if (typeof initScrollAnimations === 'function') {
+                initScrollAnimations();
+            }
+        });
     </script>
   
 </body>

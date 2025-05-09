@@ -1,0 +1,113 @@
+/* 
+ * REFINED SCROLL ANIMATIONS
+ * Subtle animations triggered when elements enter the viewport
+ */
+
+/* Base Animation Setup */
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    will-change: opacity, transform;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+}
+
+/* Fade In Only - Most Subtle */
+.fade-in {
+    opacity: 0;
+    transform: translate(0, 0) scale(1);
+}
+
+/* Subtle Reveal Directions */
+.from-bottom {
+    transform: translateY(30px);
+}
+
+.from-left {
+    transform: translateX(-30px);
+}
+
+.from-right {
+    transform: translateX(30px);
+}
+
+/* Subtle Scale */
+.scale-in {
+    transform: scale(0.95);
+}
+
+/* Sequence Delays */
+.delay-100 {
+    transition-delay: 0.1s;
+}
+
+.delay-200 {
+    transition-delay: 0.2s;
+}
+
+.delay-300 {
+    transition-delay: 0.3s;
+}
+
+.delay-400 {
+    transition-delay: 0.4s;
+}
+
+.delay-500 {
+    transition-delay: 0.5s;
+}
+
+/* Staggered Children Animation - Subtle */
+.stagger-items > * {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.stagger-items.visible > *:nth-child(1) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.1s;
+}
+
+.stagger-items.visible > *:nth-child(2) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+.stagger-items.visible > *:nth-child(3) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+
+.stagger-items.visible > *:nth-child(4) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.4s;
+}
+
+.stagger-items.visible > *:nth-child(n+5) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s;
+}
+
+/* Disable animations on mobile for performance */
+@media (max-width: 767px) {
+    .animate-on-scroll {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    
+    .stagger-items > * {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

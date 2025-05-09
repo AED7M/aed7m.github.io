@@ -256,3 +256,185 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+/**
+ * Subtle Animation System
+ * Applies minimal, professional animations to portfolio elements
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Apply animation classes to key elements
+    applyAnimationClasses();
+    
+    // Initialize the intersection observer for scroll animations
+    initScrollObserver();
+    
+    // Handle project tab switching
+    initProjectTabs();
+});
+
+// Apply animation classes to portfolio elements
+function applyAnimationClasses() {
+    // Section titles - subtle fade in
+    document.querySelectorAll('.site-section h3').forEach(title => {
+        title.classList.add('animate-on-scroll', 'fade-in');
+    });
+    
+    // Section dividers - fade in from bottom with delay
+    document.querySelectorAll('.img-lines').forEach(line => {
+        line.classList.add('animate-on-scroll', 'from-bottom', 'delay-100');
+    });
+    
+    // Skill cards - stagger from bottom
+    const skillCards = document.querySelectorAll('.skill-card');
+    skillCards.forEach((card, index) => {
+        card.classList.add('animate-on-scroll', 'from-bottom');
+        card.style.transitionDelay = (0.1 * (index % 3) + 0.2) + 's';
+    });
+    
+    // Service cards - stagger from bottom
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach((card, index) => {
+        card.classList.add('animate-on-scroll', 'from-bottom');
+        card.style.transitionDelay = (0.1 * (index % 3) + 0.2) + 's';
+    });
+    
+    // Project cards - stagger scale in
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach((card, index) => {
+        card.classList.add('animate-on-scroll', 'scale-in');
+        card.style.transitionDelay = (0.1 * (index % 3)) + 's';
+    });
+    
+    // Education cards - from sides
+    const educationCards = document.querySelectorAll('.education-card');
+    if (educationCards.length >= 3) {
+        educationCards[0].classList.add('animate-on-scroll', 'from-left');
+        educationCards[1].classList.add('animate-on-scroll', 'from-bottom', 'delay-200');
+        educationCards[2].classList.add('animate-on-scroll', 'from-right');
+    } else {
+        educationCards.forEach(card => {
+            card.classList.add('animate-on-scroll', 'from-bottom');
+        });
+    }
+    
+    // Contact cards - stagger from bottom
+    const contactCards = document.querySelectorAll('.contact-card');
+    contactCards.forEach((card, index) => {
+        card.classList.add('animate-on-scroll', 'from-bottom');
+        card.style.transitionDelay = (0.1 * index) + 's';
+    });
+    
+    // Hero section elements
+    if (document.querySelector('.hero-text-container h1')) {
+        document.querySelector('.hero-text-container h1').classList.add('animate-on-scroll', 'from-bottom');
+        document.querySelector('.hero-text-container h1').classList.add('visible'); // Appear immediately
+    }
+    
+    if (document.querySelector('.job-title-container')) {
+        document.querySelector('.job-title-container').classList.add('animate-on-scroll', 'from-bottom', 'delay-200');
+        document.querySelector('.job-title-container').classList.add('visible'); // Appear immediately
+    }
+    
+    // Hero buttons as staggered items
+    if (document.querySelector('.hero-buttons')) {
+        document.querySelector('.hero-buttons').classList.add('stagger-items', 'visible'); // Appear immediately
+    }
+    
+    if (document.querySelector('.hero-card')) {
+        document.querySelector('.hero-card').classList.add('animate-on-scroll', 'from-right', 'delay-300');
+        document.querySelector('.hero-card').classList.add('visible'); // Appear immediately
+    }
+    
+    // Counter cards
+    document.querySelectorAll('.counter-card').forEach(counter => {
+        counter.classList.add('animate-on-scroll', 'scale-in');
+    });
+}
+
+// Initialize intersection observer for scroll animations
+function initScrollObserver() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // Toggle the visible class based on whether the element is in view
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                // Remove the visible class when element scrolls out of view
+                // Only remove for elements that aren't in the hero section
+                if (!entry.target.closest('#hero')) {
+                    entry.target.classList.remove('visible');
+                }
+            }
+        });
+    }, {
+        root: null,
+        threshold: 0.15,
+        rootMargin: '0px'
+    });
+    
+    // Observe elements with animation classes
+    document.querySelectorAll('.animate-on-scroll, .stagger-items').forEach(element => {
+        // Skip elements that should appear immediately (hero section)
+        if (element.closest('#hero')) {
+            element.classList.add('visible');
+        } else {
+            observer.observe(element);
+        }
+    });
+}
+
+// Handle project tab switching
+function initProjectTabs() {
+    const tabButtons = document.querySelectorAll('.project-tab');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            const tabContainer = this.closest('.modal-body');
+            
+            // Remove active class from all tabs and panes
+            tabContainer.querySelectorAll('.project-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            tabContainer.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.remove('active');
+            });
+            
+            // Add active class to selected tab and pane
+            this.classList.add('active');
+            document.getElementById(tabId + '-tab').classList.add('active');
+        });
+    });
+    
+    // Handle "Watch Demo" button in project modal
+    const demoButtons = document.querySelectorAll('.video-demo-btn');
+    demoButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            const tabContainer = this.closest('.modal-body');
+            
+            tabContainer.querySelectorAll('.project-tab').forEach(tab => {
+                if (tab.getAttribute('data-tab') === tabId) {
+                    tab.click();
+                }
+            });
+        });
+    });
+    
+    // Handle "Back to Overview" button in project modal
+    const backButtons = document.querySelectorAll('.back-to-overview');
+    backButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            const tabContainer = this.closest('.modal-body');
+            
+            tabContainer.querySelectorAll('.project-tab').forEach(tab => {
+                if (tab.getAttribute('data-tab') === tabId) {
+                    tab.click();
+                }
+            });
+        });
+    });
+}
