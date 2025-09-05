@@ -105,6 +105,63 @@
     </style>
 
     <style>
+    /* Typing Animation Styles */
+    .typing-indicator {
+        display: inline-block;
+        min-height: 1.5em;
+    }
+    
+    .cursor {
+        display: inline-block;
+        background-color: #3498db;
+        margin-left: 1px;
+        width: 2px;
+        height: 1em;
+        animation: blink 1s infinite;
+        vertical-align: baseline;
+    }
+    
+    @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+    }
+    
+    #typed-text {
+        display: inline-block;
+        min-width: 1px;
+        vertical-align: baseline;
+        line-height: 1;
+    }
+    
+    /* Hero Section Job Title Styling */
+    .hero-text-container .job-title {
+        color: #3498db;
+        font-size: 24px;
+        font-weight: 600;
+        margin: 5px 0 15px 0;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .job-title-container {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+    
+    .typing-indicator {
+        display: inline-flex;
+        align-items: baseline;
+        min-height: 1.5em;
+    }
+    
+    /* Override the original typing-indicator style */
+    .typing-indicator {
+        display: inline-block;
+        min-height: 1.5em;
+    }
+    
     /* Direct Mobile Menu Implementation */
     #mobile-menu-overlay {
         display: none;
@@ -301,8 +358,26 @@
     <style id="enhanced-portfolio-styles">
         /* Enhanced Portfolio Section Styles */
         .section-portfolio {
-            background-color: #f9f9f9;
+            background: linear-gradient(135deg, #f9f9f9 0%, #e9ecef 100%);
             padding: 80px 0;
+            position: relative;
+        }
+        
+        .section-portfolio::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 20% 20%, rgba(52, 152, 219, 0.06) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 80%, rgba(52, 152, 219, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .section-portfolio .container {
+            position: relative;
+            z-index: 1;
         }
         
         /* Project Cards Styling */
@@ -913,6 +988,221 @@
         .project-item:nth-child(5) {
             animation-delay: 0.5s;
         }
+        
+        /* Skills Section Styles */
+        .section-skills {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .section-skills::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 80% 20%, rgba(52, 152, 219, 0.08) 0%, transparent 50%),
+                              radial-gradient(circle at 20% 80%, rgba(52, 152, 219, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .section-skills .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Experience Section Styles */
+        .section-experience {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .section-experience::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 20% 80%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .experience-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .experience-item {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid rgba(52, 152, 219, 0.1);
+        }
+        
+        .experience-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-color: rgba(52, 152, 219, 0.3);
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .experience-title-section {
+            flex: 1;
+        }
+        
+        .job-title {
+            color: #2c3e50;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            line-height: 1.2;
+        }
+        
+        .company-name {
+            color: #3498db;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .date-badge {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            white-space: nowrap;
+        }
+        
+        .experience-description {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .achievements-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
+        }
+        
+        .achievements-list li {
+            position: relative;
+            padding: 15px 0 15px 30px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .achievements-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .achievements-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            top: 15px;
+            color: #3498db;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .achievements-list li strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .skills-used {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        .skill-tag {
+            background: linear-gradient(135deg, #e3f2fd, #f0f8ff);
+            color: #1976d2;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(25, 118, 210, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(25, 118, 210, 0.4);
+        }
+        
+        /* Mobile responsive adjustments for experience section */
+        @media (max-width: 768px) {
+            .experience-timeline {
+                padding: 10px;
+            }
+            
+            .experience-item {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .job-title {
+                font-size: 20px;
+            }
+            
+            .company-name {
+                font-size: 16px;
+            }
+            
+            .date-badge {
+                font-size: 12px;
+                padding: 8px 14px;
+            }
+            
+            .achievements-list li {
+                padding-left: 25px;
+                font-size: 14px;
+            }
+            
+            .skill-tag {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+        }
     </style>
 
 </head>
@@ -940,6 +1230,7 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li class="page-scroll"><a href="#hero">Home</a></li>
+                        <li class="page-scroll"><a href="#experience">Experience</a></li>
                         <li class="page-scroll"><a href="#services">Services</a></li>
                         <li class="page-scroll"><a href="#portfolio">Portfolio</a></li>
                         <li class="page-scroll"><a href="#contact">Contact</a></li>
@@ -960,6 +1251,7 @@
             </div>
             <ul class="mobile-menu-items">
                 <li><a href="#hero">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -973,6 +1265,7 @@
             <button id="pure-mobile-close">×</button>
             <ul id="pure-mobile-links">
                 <li><a href="#hero">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -1100,6 +1393,47 @@
                 </div>
             </div>
         </section><!-- /.section-skills -->
+
+        <!-- Work Experience -->
+        <section id="experience" class="site-section section-experience">
+            <div class="container">
+                <div class="text-center">
+                    <h3>Work Experience</h3>
+                    <img src="assets/img/lines.svg" class="img-lines" alt="lines">
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="experience-timeline">
+                            <!-- Data Analyst Intern at Sustainly.tech -->
+                            <div class="experience-item animate-on-scroll stagger-fade">
+                                <div class="experience-header">
+                                    <div class="experience-title-section">
+                                        <h4 class="job-title">Data Analyst Intern</h4>
+                                        <h5 class="company-name">Sustainly.tech | Remote</h5>
+                                    </div>
+                                    <span class="date-badge">Jul 2025 - Present</span>
+                                </div>
+                                <div class="experience-description">
+                                    <ul class="achievements-list">
+                                        <li><strong>Climate Risk Assessment:</strong> Executed comprehensive climate risk assessments across 8 sectors by integrating data from 15+ sources (financial disclosures, academic research), identifying key physical and transition risk drivers</li>
+                                        <li><strong>Financial Modeling:</strong> Built scenario-based financial models in Python integrating 9 years of historical emissions and financial data, projecting carbon cost exposure ranging from $325M to $2.15B (2030–2060)</li>
+                                        <li><strong>Agricultural Analysis:</strong> Quantified agricultural sector vulnerabilities, revealing it absorbs 82% of drought-related economic impacts and contributes ~20% of global GHG emissions, informing targeted mitigation strategies</li>
+                                        <li><strong>Risk Simulation:</strong> Simulated 9 climate risk pathways, showing 85–91% cost savings under a Net Zero compared to Business-as-Usual, providing actionable recommendations for corporate decision-making</li>
+                                    </ul>
+                                    <div class="skills-used">
+                                        <span class="skill-tag">Python</span>
+                                        <span class="skill-tag">Financial Modeling</span>
+                                        <span class="skill-tag">Climate Risk Analysis</span>
+                                        <span class="skill-tag">Data Integration</span>
+                                        <span class="skill-tag">Scenario Analysis</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- /.section-experience -->
 
         <!-- Services -->
         <section id="services" class="site-section section-services overlay">
@@ -1339,7 +1673,7 @@
                                     <i class="glyphicon glyphicon-briefcase"></i>
                                 </div>
                                 <div class="counter-value-wrapper">
-                                    <p class="counter start" data-to="1" data-speed="2000">0</p>
+                                    <p class="counter start" data-to="2" data-speed="2000">0</p>
                                 </div>
                                 <h4>Years Experience</h4>
                             </div>
@@ -1350,7 +1684,7 @@
                                     <i class="glyphicon glyphicon-tasks"></i>
                                 </div>
                                 <div class="counter-value-wrapper">
-                                    <p class="counter start" data-to="4" data-speed="2000">0</p>
+                                    <p class="counter start" data-to="6" data-speed="2000">0</p>
                                 </div>       
                                 <h4>Projects Completed</h4>
                             </div>      
