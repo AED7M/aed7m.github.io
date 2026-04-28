@@ -9,9 +9,9 @@ interface Props {
 }
 
 const SITE_URL = "https://abdelrahmanelaref.pages.dev";
-const DEFAULT_TITLE = "Abdelrahman Elaref — Data Analyst";
+const DEFAULT_TITLE = "Abdelrahman Elaref · Data Analyst";
 const DEFAULT_DESC =
-  "Data Analyst building production dashboards for enterprise brands across KSA and UAE. Power BI, Python, ETL, and modern BI craft.";
+  "Data Analyst building production dashboards for enterprise brands. Power BI, Python, ETL, and modern BI craft.";
 
 const {
   title = DEFAULT_TITLE,
@@ -21,7 +21,7 @@ const {
 } = Astro.props;
 
 const fullTitle =
-  title === DEFAULT_TITLE ? title : `${title} — Abdelrahman Elaref`;
+  title === DEFAULT_TITLE ? title : `${title} · Abdelrahman Elaref`;
 const canonical = new URL(path, SITE_URL).toString();
 ---
 
@@ -63,7 +63,7 @@ const canonical = new URL(path, SITE_URL).toString();
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
     />
   </head>
   <body>

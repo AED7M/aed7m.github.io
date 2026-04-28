@@ -18,15 +18,15 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: "muhimma-dashboards",
-    title: "Muhimma — Production dashboards for enterprise brands",
+    title: "Muhimma. Production dashboards for enterprise brands.",
     kind: "Case study",
     tags: ["Power BI", "React", "Data modeling", "Enterprise BI"],
     summary:
       "8+ Power BI and 2 React dashboards built for a regional consumer intelligence company serving 85+ brand clients across KSA & UAE.",
     intro:
-      "Owned the full lifecycle of production-grade dashboards used directly by enterprise brand clients of one of the region's leading consumer intelligence companies. Built from raw research datasets and architecture documents into interactive tools for executive decision-makers — covering data modeling, KPI design, visual logic, and shipping to production.",
+      "Owned the full lifecycle of production-grade dashboards used directly by enterprise brand clients of one of the region's leading consumer intelligence companies. Built from raw research datasets and architecture documents into interactive tools for executive decision-makers, covering data modeling, KPI design, visual logic, and shipping to production.",
     highlights: [
-      "Built and maintained 8+ production Power BI dashboards used daily by enterprise brand clients across multiple retail categories in KSA and UAE — owning data modeling, DAX measures, visual design, performance optimization, and ongoing maintenance.",
+      "Built and maintained 8+ production Power BI dashboards used daily by enterprise brand clients across multiple retail categories. Owned data modeling, DAX measures, visual design, performance optimization, and ongoing maintenance.",
       "Architected and shipped 2 production React dashboards as product owner, directing AI-assisted implementation through to enterprise-quality release. Defined requirements, structured data flow, designed UX, and acted as the quality gate.",
       "Translated multi-stage market research projects into dashboards that made complex consumer intelligence accessible to non-technical decision-makers.",
       "Iterated on existing dashboards by shipping new features, improving UX, and resolving data issues based on direct client feedback loops.",
@@ -34,8 +34,7 @@ export const projects: Project[] = [
     ],
     metrics: [
       { value: "8+", label: "Power BI dashboards in production" },
-      { value: "2", label: "React dashboards architected end-to-end" },
-      { value: "85+", label: "Enterprise brand clients served" },
+      { value: "2", label: "React dashboards architected end to end" },
       { value: "400k+", label: "Verified consumers in source datasets" },
     ],
     tech: [
@@ -49,9 +48,9 @@ export const projects: Project[] = [
       "Client-ready BI",
     ],
     context:
-      "Muhimma Digital Platform Co. is a leading consumer intelligence company serving 85+ enterprise brand clients across Saudi Arabia and the UAE, operating a verified community of 400,000+ identity-verified members.",
+      "Muhimma Digital Platform Co. is a leading consumer intelligence company serving enterprise brand clients across Saudi Arabia and the UAE, operating a verified community of 400,000+ identity-verified members.",
     note:
-      "Masked client mockups will be added once client permission is confirmed. All work shown is at the level of scope, role, and impact — no client data is exposed.",
+      "Masked client mockups will be added once client permission is confirmed. All work shown is at the level of scope, role, and impact. No client data is exposed.",
   },
   {
     slug: "automated-reporting-system",
@@ -66,10 +65,10 @@ export const projects: Project[] = [
     intro:
       "A comprehensive Python-based reporting system that revolutionized reporting workflows for an e-commerce dataset, reducing manual time by 90% while increasing accuracy and consistency through automation.",
     highlights: [
-      "End-to-end pipeline: ingest, clean, transform, and generate scheduled reports from raw e-commerce datasets.",
+      "End to end pipeline: ingest, clean, transform, and generate scheduled reports from raw e-commerce datasets.",
       "Reduced manual reporting time by 90%, freeing analyst time for higher-value work.",
       "Standardized output formats so stakeholders receive identical, comparable reports every cycle.",
-      "Built with reproducibility in mind — same inputs always produce same outputs, no manual touch-ups.",
+      "Built with reproducibility in mind: same inputs always produce same outputs, no manual touch-ups.",
     ],
     tech: ["Python", "Pandas", "ETL", "Scheduled reporting"],
   },
@@ -104,7 +103,7 @@ export const projects: Project[] = [
     coverAlt: "Gemstone Price Prediction model preview",
     github: "https://github.com/AED7M/gemstone-price-prediction",
     intro:
-      "End-to-end ML project predicting cubic zirconia prices from physical attributes (cut, color, clarity, dimensions). Walks the full pipeline from EDA through feature engineering to model evaluation.",
+      "End to end ML project predicting cubic zirconia prices from physical attributes (cut, color, clarity, dimensions). Walks the full pipeline from EDA through feature engineering to model evaluation.",
     highlights: [
       "Achieved 97.8% accuracy on the held-out test set using regression with engineered features.",
       "Full EDA covering distributions, correlations, and outlier handling to inform modeling choices.",

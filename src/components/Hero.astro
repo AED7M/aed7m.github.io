@@ -1,32 +1,29 @@
 ---
 const stats = [
-  { value: "8+", label: "Production dashboards shipped" },
-  { value: "85+", label: "Enterprise brand clients reached" },
-  { value: "400k+", label: "Verified consumers in datasets" },
+  { value: "10+", label: "Production dashboards shipped" },
+  { value: "15+", label: "Data sources integrated" },
+  { value: "9", label: "Climate risk pathways simulated" },
 ];
 ---
 
 <section
   id="top"
-  class="relative pt-16 md:pt-28 pb-20 md:pb-32 border-b border-rule"
+  class="relative pt-6 md:pt-12 pb-16 md:pb-24 border-b border-rule overflow-hidden"
 >
-  <div class="mx-auto max-w-6xl px-6 lg:px-10">
+  <div class="mx-auto max-w-6xl px-6 lg:px-10 relative">
     <p class="eyebrow reveal">
-      Data Analyst <span class="mx-1 text-mute-soft">·</span> Remote
-      <span class="mx-1 text-mute-soft">·</span> KSA / UAE
+      Data Analyst <span class="mx-1 text-mute-soft">/</span> Remote
     </p>
 
-    <h1 class="display-1 mt-6 md:mt-8 max-w-4xl reveal">
-      Turning consumer
-      <span class="italic" style="color: var(--color-accent);">intelligence</span>
-      into business decisions.
+    <h1 class="display-1 mt-5 md:mt-7 max-w-5xl reveal">
+      Turning consumer <span class="accent-mark">intelligence</span> into
+      business decisions.
     </h1>
 
     <p
-      class="display-3 mt-6 md:mt-8 max-w-3xl text-mute font-display italic reveal"
+      class="display-3 mt-5 md:mt-7 max-w-3xl text-mute reveal"
     >
-      I build production dashboards for enterprise brands across Saudi Arabia
-      and the UAE.
+      <span class="serif-italic">I build production dashboards for enterprise brands.</span>
     </p>
 
     <div
@@ -37,9 +34,9 @@ const stats = [
           href="#experience"
           class="prose-link font-medium text-ink">Muhimma Digital</a
         >, where I owned the lifecycle of Power BI and React dashboards used
-        daily by major brands across the region. I work end-to-end — from raw
-        research data and architecture documents to interactive tools that
-        executives actually rely on.
+        daily by major brands. I work end to end, from raw research data and
+        architecture documents to interactive tools that executives actually
+        rely on.
       </p>
     </div>
 
@@ -49,7 +46,7 @@ const stats = [
         class="inline-flex items-center justify-center gap-2 bg-ink text-paper px-6 py-3 text-sm font-medium hover:bg-accent transition-colors duration-200"
       >
         Get in touch
-        <span aria-hidden="true">&rarr;</span>
+        <span aria-hidden="true">→</span>
       </a>
       <a
         href="/resume/Abdelrahman_Elaref_Resume.pdf"
@@ -60,12 +57,12 @@ const stats = [
       </a>
     </div>
 
-    <!-- Editorial stats strip. On mobile: horizontal scroll. On md+: 3-col grid with rules. -->
+    <!-- Editorial stats strip. md+: 3-col grid. Mobile: horizontal scroll. -->
     <dl
-      class="mt-16 md:mt-24 hidden md:grid md:grid-cols-3 gap-6 border-t border-rule pt-12"
+      class="mt-14 md:mt-20 hidden md:grid md:grid-cols-3 gap-6 border-t border-rule pt-10"
     >
       {
-        stats.map((stat, i) => (
+        stats.map((stat) => (
           <div class="flex flex-col gap-3 px-6 border-r border-rule last:border-r-0 first:pl-0 last:pr-0">
             <dt class="metric text-ink">{stat.value}</dt>
             <dd class="text-sm text-mute leading-snug max-w-xs">
@@ -76,9 +73,8 @@ const stats = [
       }
     </dl>
 
-    <!-- Mobile-only stats: horizontal scroll snap -->
     <div
-      class="md:hidden mt-12 -mx-6 px-6 overflow-x-auto pt-10 border-t border-rule scroll-px-6 snap-x snap-mandatory"
+      class="md:hidden mt-10 -mx-6 px-6 overflow-x-auto pt-8 border-t border-rule snap-x snap-mandatory"
       role="list"
     >
       <dl class="flex gap-6 min-w-max">
@@ -94,9 +90,7 @@ const stats = [
           ))
         }
       </dl>
-      <p class="mt-3 text-[11px] uppercase tracking-wider text-mute-soft">
-        Swipe →
-      </p>
     </div>
   </div>
+
 </section>
