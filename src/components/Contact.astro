@@ -1,0 +1,154 @@
+---
+const channels = [
+  {
+    label: "Email",
+    value: "alarfb2@gmail.com",
+    href: "mailto:alarfb2@gmail.com",
+  },
+  {
+    label: "LinkedIn",
+    value: "linkedin.com/in/abdelrahmanelaref",
+    href: "https://linkedin.com/in/abdelrahmanelaref",
+  },
+  {
+    label: "GitHub",
+    value: "github.com/AED7M",
+    href: "https://github.com/AED7M",
+  },
+];
+---
+
+<section id="contact" class="py-24 md:py-36">
+  <div class="mx-auto max-w-6xl px-6 lg:px-10">
+    <div class="reveal max-w-3xl">
+      <p class="eyebrow">Contact</p>
+      <h2 class="display-2 mt-4">
+        Open to remote Data Analyst roles &mdash; let&rsquo;s talk.
+      </h2>
+      <p class="mt-6 text-base md:text-lg text-ink-soft leading-relaxed">
+        If you&rsquo;re hiring, building something interesting, or just want to
+        compare notes on dashboards, the easiest way to reach me is the form
+        below or directly by email.
+      </p>
+    </div>
+
+    <div class="mt-16 grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+      <!-- Contact channels -->
+      <div class="lg:col-span-2">
+        <ul class="flex flex-col">
+          {
+            channels.map((c, i) => (
+              <li
+                class={`reveal py-6 ${i === 0 ? "border-t border-rule" : ""} border-b border-rule`}
+              >
+                <p class="eyebrow text-mute">{c.label}</p>
+                <a
+                  href={c.href}
+                  target={c.href.startsWith("http") ? "_blank" : undefined}
+                  rel={c.href.startsWith("http") ? "noopener" : undefined}
+                  class="mt-2 block font-display text-xl md:text-2xl text-ink hover:text-accent transition-colors break-all"
+                >
+                  {c.value}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-10 reveal">
+          <p class="eyebrow">Resume</p>
+          <a
+            href="/resume/Abdelrahman_Elaref_Resume.pdf"
+            download
+            class="mt-2 inline-flex items-center gap-2 text-base font-medium text-ink border-b border-accent pb-0.5 hover:text-accent transition-colors"
+          >
+            Download PDF
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form
+        id="contactForm"
+        action="https://formspree.io/f/xovezkwo"
+        method="POST"
+        class="lg:col-span-3 reveal flex flex-col gap-6"
+      >
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <label class="flex flex-col gap-2">
+            <span class="eyebrow text-mute">Name</span>
+            <input
+              type="text"
+              name="name"
+              required
+              class="bg-transparent border-b border-rule pb-2 text-base text-ink placeholder:text-mute-soft focus:border-accent focus:outline-none transition-colors"
+              placeholder="Your name"
+            />
+          </label>
+          <label class="flex flex-col gap-2">
+            <span class="eyebrow text-mute">Email</span>
+            <input
+              type="email"
+              name="email"
+              required
+              class="bg-transparent border-b border-rule pb-2 text-base text-ink placeholder:text-mute-soft focus:border-accent focus:outline-none transition-colors"
+              placeholder="you@company.com"
+            />
+          </label>
+        </div>
+        <label class="flex flex-col gap-2">
+          <span class="eyebrow text-mute">Message</span>
+          <textarea
+            name="message"
+            required
+            rows="5"
+            class="bg-transparent border-b border-rule pb-2 text-base text-ink placeholder:text-mute-soft focus:border-accent focus:outline-none transition-colors resize-none"
+            placeholder="What's on your mind?"></textarea>
+        </label>
+
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center gap-2 bg-ink text-paper px-6 py-3 text-sm font-medium hover:bg-accent transition-colors duration-200 self-start"
+          >
+            Send message
+            <span aria-hidden="true">&rarr;</span>
+          </button>
+          <p id="form-status" class="text-sm text-mute" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById("contactForm");
+    const status = document.getElementById("form-status");
+    if (!form || !status) return;
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      status.textContent = "Sending…";
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: data,
+          headers: { Accept: "application/json" },
+        });
+        if (res.ok) {
+          form.reset();
+          status.textContent = "Thanks — I'll get back to you shortly.";
+          status.style.color = "var(--color-accent)";
+        } else {
+          status.textContent =
+            "Something went wrong. Try emailing alarfb2@gmail.com directly.";
+        }
+      } catch {
+        status.textContent =
+          "Network error. Try emailing alarfb2@gmail.com directly.";
+      }
+    });
+  })();
+</script>

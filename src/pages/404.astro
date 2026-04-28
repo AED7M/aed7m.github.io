@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="Not found" description="That page doesn't exist." path="/404/">
+  <Nav />
+  <main id="main">
+    <section class="py-32 md:py-48 border-b border-rule">
+      <div class="mx-auto max-w-3xl px-6 lg:px-10 text-center">
+        <p class="eyebrow">404</p>
+        <h1 class="display-1 mt-6">
+          <span class="italic" style="color: var(--color-accent);">No data</span> at this path.
+        </h1>
+        <p class="mt-8 text-lg text-ink-soft leading-relaxed">
+          The page you&rsquo;re looking for doesn&rsquo;t exist — or hasn&rsquo;t been
+          built yet.
+        </p>
+        <div class="mt-10">
+          <a
+            href="/"
+            class="inline-flex items-center gap-2 bg-ink text-paper px-6 py-3 text-sm font-medium hover:bg-accent transition-colors duration-200"
+          >
+            <span aria-hidden="true">&larr;</span> Back home
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

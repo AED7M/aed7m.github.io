@@ -1,39 +1,41 @@
-# Abdelrahman Elaref's Data Analytics Portfolio
+# Abdelrahman Elaref — Portfolio
 
-A personal portfolio website showcasing my skills, projects, and experience as a Data Analyst.
+Editorial-minimal portfolio site for Abdelrahman Elaref, Data Analyst.
 
-## Overview
+Built with [Astro](https://astro.build) + [Tailwind CSS v4](https://tailwindcss.com), deployed to Cloudflare Pages.
 
-This portfolio website highlights my expertise in:
-- Data Analysis and Visualization
-- ETL Processes and Data Integration
-- Python, SQL, and Database Management
-- Business Intelligence and Dashboard Design
+## Local development
 
-## Features
+```bash
+npm install
+npm run dev      # → http://localhost:4321
+npm run build    # → ./dist
+npm run preview  # serve ./dist locally
+```
 
-- Responsive design that works on desktop and mobile devices
-- Interactive elements including animated counters and particle effects
-- Project showcase with detailed descriptions
-- Contact form for potential employers or clients
+## Project structure
 
-## Projects Showcased
+```
+src/
+  components/   shared UI components (Nav, Footer, Hero, Experience, ...)
+  data/         project data
+  layouts/      base Layout with head/meta defaults
+  pages/        routes — index.astro, 404.astro, work/[slug].astro
+  styles/       global.css with design tokens (Tailwind @theme)
+public/
+  img/          static images
+  resume/       resume PDF
+  _headers      Cloudflare Pages security + cache headers
+```
 
-- Automated Reporting System
-- Sales Analytics ETL
-- Sales Performance Analysis
-- Gemstone Price Prediction
+## Design system
 
-## Technologies Used
+Defined in `src/styles/global.css` via Tailwind v4's `@theme` directive.
 
-- HTML5, CSS3, JavaScript
-- Bootstrap 4 Framework
-- jQuery for animations and interactivity
-- Particle.js for background effects
+- **Type:** Fraunces (display, serif) + Inter (body, sans)
+- **Color:** warm off-white paper, near-black ink, single amber accent (`#b45309`) used sparingly
+- **Motion:** minimal — `IntersectionObserver`-driven reveal on scroll, honors `prefers-reduced-motion`
 
-## Contact
+## Deployment
 
-Feel free to reach out to me for job opportunities or project collaborations:
-- Email: alarfb2@gmail.com
-- LinkedIn: [linkedin.com/in/abdelrahmanelaref](https://linkedin.com/in/abdelrahmanelaref)
-- GitHub: [github.com/AED7M](https://github.com/AED7M)
+Auto-deployed to Cloudflare Pages on push. Build command: `npm run build`. Output directory: `dist`.

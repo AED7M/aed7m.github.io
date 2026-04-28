@@ -1,0 +1,187 @@
+---
+const links = [
+  { href: "#experience", label: "Experience" },
+  { href: "#work", label: "Selected Work" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<header
+  class="sticky top-0 z-40 backdrop-blur-md bg-paper/85 border-b border-rule"
+>
+  <div
+    class="mx-auto max-w-6xl px-6 lg:px-10 h-16 flex items-center justify-between"
+  >
+    <a
+      href="#top"
+      class="font-display text-base sm:text-lg tracking-tight-er text-ink truncate"
+      aria-label="Abdelrahman Elaref"
+    >
+      Abdelrahman Elaref
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-7">
+      <ul class="flex items-center gap-7 text-sm text-mute">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="hover:text-ink transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        href="/resume/Abdelrahman_Elaref_Resume.pdf"
+        download
+        class="text-sm font-medium text-ink border-b border-accent pb-0.5 hover:text-accent transition-colors duration-200"
+      >
+        Resume
+      </a>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button
+      type="button"
+      id="mobile-nav-open"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      class="md:hidden flex flex-col justify-center items-end gap-1.5 w-10 h-10 -mr-2 group"
+    >
+      <span
+        class="block h-px w-7 bg-ink transition-transform duration-300"
+        data-bar="top"></span>
+      <span
+        class="block h-px w-5 bg-ink transition-all duration-300 group-hover:w-7"
+      ></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile full-screen overlay -->
+<div
+  id="mobile-nav"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Site navigation"
+  class="fixed inset-0 z-50 bg-paper opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col"
+>
+  <div
+    class="flex items-center justify-between h-16 px-6 border-b border-rule shrink-0"
+  >
+    <span class="font-display text-base tracking-tight-er text-ink">
+      Abdelrahman Elaref
+    </span>
+    <button
+      type="button"
+      id="mobile-nav-close"
+      aria-label="Close menu"
+      class="w-10 h-10 -mr-2 flex items-center justify-center"
+    >
+      <span class="relative block w-6 h-6">
+        <span
+          class="absolute top-1/2 left-0 w-6 h-px bg-ink rotate-45 origin-center"
+        ></span>
+        <span
+          class="absolute top-1/2 left-0 w-6 h-px bg-ink -rotate-45 origin-center"
+        ></span>
+      </span>
+    </button>
+  </div>
+
+  <nav class="flex-1 flex flex-col justify-between px-6 py-12 overflow-y-auto">
+    <ul class="flex flex-col gap-1">
+      {
+        links.map((link, i) => (
+          <li
+            class="border-b border-rule"
+            style={`transition-delay: ${100 + i * 60}ms;`}
+          >
+            <a
+              href={link.href}
+              data-mobile-link
+              class="block py-5 font-display text-3xl tracking-tight-er text-ink"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="border-b border-rule">
+        <a
+          href="/resume/Abdelrahman_Elaref_Resume.pdf"
+          download
+          data-mobile-link
+          class="flex items-center justify-between py-5 font-display text-3xl tracking-tight-er text-ink"
+        >
+          Resume
+          <span class="text-base text-mute" aria-hidden="true">↓</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="mt-12 flex flex-col gap-4">
+      <p class="eyebrow">Direct</p>
+      <ul class="flex flex-col gap-3 text-base">
+        <li>
+          <a href="mailto:alarfb2@gmail.com" class="text-ink"
+            >alarfb2@gmail.com</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://linkedin.com/in/abdelrahmanelaref"
+            target="_blank"
+            rel="noopener"
+            class="text-ink">LinkedIn</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://github.com/AED7M"
+            target="_blank"
+            rel="noopener"
+            class="text-ink">GitHub</a
+          >
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<script is:inline>
+  (function () {
+    const openBtn = document.getElementById("mobile-nav-open");
+    const closeBtn = document.getElementById("mobile-nav-close");
+    const nav = document.getElementById("mobile-nav");
+    if (!openBtn || !closeBtn || !nav) return;
+
+    function open() {
+      nav.classList.remove("opacity-0", "pointer-events-none");
+      nav.classList.add("opacity-100");
+      openBtn.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+    }
+    function close() {
+      nav.classList.add("opacity-0", "pointer-events-none");
+      nav.classList.remove("opacity-100");
+      openBtn.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    }
+
+    openBtn.addEventListener("click", open);
+    closeBtn.addEventListener("click", close);
+    nav
+      .querySelectorAll("[data-mobile-link]")
+      .forEach((a) => a.addEventListener("click", close));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+  })();
+</script>

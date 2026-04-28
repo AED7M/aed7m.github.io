@@ -1,0 +1,68 @@
+---
+import { projects } from "../data/projects";
+---
+
+<section id="work" class="py-24 md:py-36 border-b border-rule bg-paper-2/40">
+  <div class="mx-auto max-w-6xl px-6 lg:px-10">
+    <div class="reveal">
+      <p class="eyebrow">Selected Work</p>
+      <h2 class="display-2 mt-4 max-w-3xl">
+        Four projects, picked for what they show.
+      </h2>
+      <p class="mt-6 max-w-2xl text-base md:text-lg text-ink-soft leading-relaxed">
+        One enterprise case study, two end-to-end data pipelines, one machine
+        learning project. Together they cover production BI, ETL, dashboarding,
+        and modeling.
+      </p>
+    </div>
+
+    <ul class="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-2 gap-px bg-rule border border-rule">
+      {
+        projects.map((p, i) => (
+          <li class="bg-paper">
+            <a
+              href={`/work/${p.slug}/`}
+              class="group block h-full p-7 md:p-10 transition-colors duration-300 hover:bg-paper-2/60"
+            >
+              <div class="flex items-center justify-between">
+                <span class="eyebrow">{p.kind}</span>
+                <span
+                  class="text-xs uppercase tracking-wider text-mute opacity-0 group-hover:opacity-100 transition-opacity"
+                  aria-hidden="true"
+                >
+                  Read &rarr;
+                </span>
+              </div>
+
+              <h3 class="display-3 mt-5 text-ink leading-tight">
+                {p.title}
+              </h3>
+
+              <p class="mt-5 text-base text-ink-soft leading-relaxed">
+                {p.summary}
+              </p>
+
+              <ul class="mt-6 flex flex-wrap gap-1.5">
+                {p.tags.map((t) => (
+                  <li class="text-[11px] uppercase tracking-wider text-mute border border-rule px-2.5 py-1">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+
+              <div class="mt-8 flex items-center gap-2 text-sm text-ink">
+                <span class="font-medium">View case</span>
+                <span
+                  class="inline-block transition-transform duration-300 group-hover:translate-x-1"
+                  aria-hidden="true"
+                >
+                  &rarr;
+                </span>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
