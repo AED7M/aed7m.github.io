@@ -57,13 +57,13 @@ const stats = [
       </a>
     </div>
 
-    <!-- Editorial stats strip. md+: 3-col grid. Mobile: horizontal scroll. -->
+    <!-- Editorial stats strip. md+: 3-col grid. Mobile: vertical stack. -->
     <dl
-      class="mt-14 md:mt-20 hidden md:grid md:grid-cols-3 gap-6 border-t border-rule pt-10"
+      class="mt-10 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 border-t border-rule pt-8 md:pt-10"
     >
       {
         stats.map((stat) => (
-          <div class="flex flex-col gap-3 px-6 border-r border-rule last:border-r-0 first:pl-0 last:pr-0">
+          <div class="flex flex-col gap-2 md:gap-3 md:px-6 md:border-r md:border-rule md:last:border-r-0 md:first:pl-0 md:last:pr-0">
             <dt class="metric text-ink">{stat.value}</dt>
             <dd class="text-sm text-mute leading-snug max-w-xs">
               {stat.label}
@@ -72,25 +72,6 @@ const stats = [
         ))
       }
     </dl>
-
-    <div
-      class="md:hidden mt-10 -mx-6 px-6 overflow-x-auto pt-8 border-t border-rule snap-x snap-mandatory"
-      role="list"
-    >
-      <dl class="flex gap-6 min-w-max">
-        {
-          stats.map((stat) => (
-            <div
-              class="flex flex-col gap-2 min-w-[55vw] snap-start border-r border-rule pr-6 last:border-r-0 last:pr-0"
-              role="listitem"
-            >
-              <dt class="metric text-ink">{stat.value}</dt>
-              <dd class="text-xs text-mute leading-snug">{stat.label}</dd>
-            </div>
-          ))
-        }
-      </dl>
-    </div>
   </div>
 
 </section>
