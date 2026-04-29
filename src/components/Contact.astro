@@ -4,25 +4,28 @@ const channels = [
     label: "Email",
     value: "alarfb2@gmail.com",
     href: "mailto:alarfb2@gmail.com",
+    icon: "mail",
   },
   {
     label: "LinkedIn",
     value: "linkedin.com/in/abdelrahmanelaref",
     href: "https://linkedin.com/in/abdelrahmanelaref",
+    icon: "linkedin",
   },
   {
     label: "GitHub",
     value: "github.com/AED7M",
     href: "https://github.com/AED7M",
+    icon: "github",
   },
 ];
 ---
 
 <section id="contact" class="py-16 md:py-24">
-  <div class="mx-auto max-w-6xl px-6 lg:px-10">
+  <div class="mx-auto max-w-7xl px-6 lg:px-10">
     <div class="max-w-3xl">
       <div class="reveal flex items-baseline gap-4 md:gap-6">
-        <span class="section-numeral">05</span>
+        <span class="section-numeral">04</span>
         <p class="eyebrow">Contact</p>
       </div>
       <h2 class="display-2 mt-5 reveal">
@@ -31,52 +34,156 @@ const channels = [
       <p class="mt-6 text-base md:text-lg text-ink-soft leading-relaxed reveal">
         If you&rsquo;re hiring, building something interesting, or just want to
         compare notes on dashboards, the easiest way to reach me is the form
-        below or directly by email.
+        below or directly through any of these.
       </p>
     </div>
 
-    <div class="mt-16 grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
-      <!-- Contact channels -->
-      <div class="lg:col-span-2">
-        <ul class="flex flex-col">
-          {
-            channels.map((c, i) => (
-              <li
-                class={`reveal py-6 ${i === 0 ? "border-t border-rule" : ""} border-b border-rule`}
-              >
-                <p class="eyebrow text-mute">{c.label}</p>
-                <a
-                  href={c.href}
-                  target={c.href.startsWith("http") ? "_blank" : undefined}
-                  rel={c.href.startsWith("http") ? "noopener" : undefined}
-                  class="mt-2 block font-display text-xl md:text-2xl text-ink hover:text-accent transition-colors break-all"
-                >
-                  {c.value}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
+    <!-- Contact channels: stacked vertical rows with icons -->
+    <ul class="mt-12 md:mt-16 flex flex-col">
+      {
+        channels.map((c, i) => (
+          <li class={`reveal ${i === 0 ? "border-t border-rule" : ""} border-b border-rule`}>
+            <a
+              href={c.href}
+              target={c.href.startsWith("http") ? "_blank" : undefined}
+              rel={c.href.startsWith("http") ? "noopener" : undefined}
+              class="group flex items-center gap-5 md:gap-8 py-6 md:py-7 hover:bg-paper-2/60 transition-colors -mx-6 lg:-mx-10 px-6 lg:px-10"
+            >
+              <span class="shrink-0 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-rule text-ink group-hover:border-accent group-hover:text-accent transition-colors">
+                {c.icon === "mail" && (
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m2 7 10 6 10-6" />
+                  </svg>
+                )}
+                {c.icon === "linkedin" && (
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z" />
+                  </svg>
+                )}
+                {c.icon === "github" && (
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.27-.01-1-.02-1.96-3.2.7-3.87-1.54-3.87-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.27-5.24-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17.91-.25 1.89-.38 2.86-.38.97 0 1.95.13 2.86.38 2.18-1.48 3.14-1.17 3.14-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.25 5.65.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.67.8.56 4.56-1.52 7.85-5.83 7.85-10.91C23.5 5.65 18.35.5 12 .5z" />
+                  </svg>
+                )}
+              </span>
 
-        <div class="mt-10 reveal">
-          <p class="eyebrow">Resume</p>
-          <a
-            href="/resume/Abdelrahman_Elaref_Resume.pdf"
-            download
-            class="mt-2 inline-flex items-center gap-2 text-base font-medium text-ink border-b border-accent pb-0.5 hover:text-accent transition-colors"
-          >
-            Download PDF
-            <span aria-hidden="true">↓</span>
-          </a>
-        </div>
+              <div class="flex-1 min-w-0">
+                <p class="eyebrow text-mute">{c.label}</p>
+                <p class="mt-1 font-display text-lg md:text-xl text-ink group-hover:text-accent transition-colors break-all">
+                  {c.value}
+                </p>
+              </div>
+
+              <span
+                class="shrink-0 hidden sm:flex items-center justify-center w-8 h-8 text-mute group-hover:text-accent group-hover:translate-x-1 transition-all duration-200"
+                aria-hidden="true"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Resume CTA -->
+    <div class="mt-10 reveal flex flex-wrap items-center gap-x-8 gap-y-3">
+      <a
+        href="/resume/Abdelrahman_Elaref_Data_Analyst.pdf"
+        data-resume-preview
+        class="inline-flex items-center gap-2 text-base font-medium text-ink border-b border-accent pb-0.5 hover:text-accent transition-colors"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="4" y="3" width="16" height="18" rx="1" />
+          <line x1="8" y1="9" x2="16" y2="9" />
+          <line x1="8" y1="13" x2="16" y2="13" />
+          <line x1="8" y1="17" x2="13" y2="17" />
+        </svg>
+        Preview resume
+      </a>
+      <a
+        href="/resume/Abdelrahman_Elaref_Data_Analyst.pdf"
+        download
+        class="inline-flex items-center gap-2 text-base font-medium text-mute border-b border-rule pb-0.5 hover:text-ink hover:border-ink transition-colors"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+        Download (PDF)
+      </a>
+    </div>
+
+    <!-- Form -->
+    <div class="mt-16 md:mt-24 pt-12 md:pt-16 border-t border-rule">
+      <div class="max-w-3xl">
+        <p class="eyebrow reveal">Send a message</p>
+        <h3 class="display-3 mt-3 reveal">
+          Tell me what you&rsquo;re working on.
+        </h3>
       </div>
 
-      <!-- Form -->
       <form
         id="contactForm"
         action="https://formspree.io/f/xovezkwo"
         method="POST"
-        class="lg:col-span-3 reveal flex flex-col gap-6"
+        class="mt-10 reveal flex flex-col gap-6 max-w-3xl"
       >
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <label class="flex flex-col gap-2">
@@ -116,7 +223,7 @@ const channels = [
             class="inline-flex items-center justify-center gap-2 bg-ink text-paper px-6 py-3 text-sm font-medium hover:bg-accent transition-colors duration-200 self-start"
           >
             Send message
-            <span aria-hidden="true">&rarr;</span>
+            <span aria-hidden="true">→</span>
           </button>
           <p id="form-status" class="text-sm text-mute" aria-live="polite"></p>
         </div>

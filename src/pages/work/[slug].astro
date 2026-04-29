@@ -26,7 +26,7 @@ const { project } = Astro.props;
   <Nav />
   <main id="main">
     <article class="pt-10 md:pt-16 pb-16 md:pb-24">
-      <div class="mx-auto max-w-3xl px-6 lg:px-10">
+      <div class="mx-auto max-w-4xl px-6 lg:px-10">
         <a
           href="/#work"
           class="inline-flex items-center gap-2 text-sm text-mute hover:text-ink transition-colors"
@@ -85,6 +85,96 @@ const { project } = Astro.props;
           )
         }
 
+      </div>
+
+      {
+        project.demos && project.demos.length > 0 && (
+          <div class="mx-auto max-w-5xl px-6 lg:px-10">
+            <section class="mt-14 reveal">
+              <div class="flex items-baseline justify-between gap-4">
+                <h2 class="eyebrow">Live demos</h2>
+                <span class="text-[11px] uppercase tracking-wider text-mute">
+                  {project.demos.length} interactive demo
+                  {project.demos.length === 1 ? "" : "s"}
+                </span>
+              </div>
+              <p class="mt-4 text-sm text-mute leading-relaxed max-w-2xl">
+                Live, interactive React dashboards running on Cloudflare. Sample
+                data; client data is never exposed.
+              </p>
+              <p class="mt-2 text-sm text-mute leading-relaxed max-w-2xl">
+                For the best experience, open the preview in a new tab.
+              </p>
+              <div class="mt-6 flex flex-col gap-8">
+                {project.demos.map((d, i) => (
+                  <figure class="demo-frame relative overflow-hidden border border-rule bg-paper-2">
+                    <div class="demo-frame-bar">
+                      <span class="demo-frame-dot" />
+                      <span class="demo-frame-dot" />
+                      <span class="demo-frame-dot" />
+                      <span class="demo-frame-url" title={d.src}>
+                        {d.src.replace(/^https?:\/\//, "")}
+                      </span>
+                      <a
+                        href={d.src}
+                        target="_blank"
+                        rel="noopener"
+                        class="demo-frame-open"
+                      >
+                        Open in new tab ↗
+                      </a>
+                    </div>
+                    <div class="demo-frame-stage">
+                      <iframe
+                        src={d.src}
+                        title={d.alt}
+                        loading={i === 0 ? "eager" : "lazy"}
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                        referrerpolicy="no-referrer"
+                      />
+                    </div>
+                    {d.caption && (
+                      <figcaption class="px-4 py-3 text-[11px] uppercase tracking-wider text-mute border-t border-rule">
+                        {d.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                ))}
+              </div>
+            </section>
+          </div>
+        )
+      }
+
+      {
+        project.mockups && project.mockups.length > 0 && (
+          <div class="mx-auto max-w-7xl px-6 lg:px-10">
+            <section class="mt-14 reveal">
+              <div class="flex items-baseline justify-between gap-4">
+                <h2 class="eyebrow">Dashboard mockups</h2>
+                <span class="text-[11px] uppercase tracking-wider text-mute">
+                  {project.mockups.length} masked preview
+                  {project.mockups.length === 1 ? "" : "s"}
+                </span>
+              </div>
+              <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {project.mockups.map((m) => (
+                  <figure class="overflow-hidden border border-rule bg-paper-2">
+                    <img
+                      src={m.src}
+                      alt={m.alt}
+                      loading="lazy"
+                      class="w-full h-auto transition-transform duration-500 hover:scale-[1.02]"
+                    />
+                  </figure>
+                ))}
+              </div>
+            </section>
+          </div>
+        )
+      }
+
+      <div class="mx-auto max-w-4xl px-6 lg:px-10">
         <section class="mt-14 reveal">
           <p class="text-base md:text-lg text-ink-soft leading-relaxed">
             {project.intro}
@@ -93,7 +183,16 @@ const { project } = Astro.props;
 
         {
           project.metrics && project.metrics.length > 0 && (
-            <dl class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-4 border-t border-b border-rule py-10 reveal">
+            <dl
+              class:list={[
+                "mt-14 grid grid-cols-2 gap-8 sm:gap-4 border-t border-b border-rule py-10 reveal",
+                project.metrics.length === 2
+                  ? "sm:grid-cols-2"
+                  : project.metrics.length === 3
+                    ? "sm:grid-cols-3"
+                    : "sm:grid-cols-4",
+              ]}
+            >
               {project.metrics.map((m, i) => (
                 <div class="flex flex-col gap-2 sm:px-3 sm:border-r sm:border-rule sm:last:border-r-0 sm:first:pl-0 sm:last:pr-0">
                   <dt
@@ -175,3 +274,86 @@ const { project } = Astro.props;
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .demo-frame {
+    box-shadow: 0 24px 60px -28px rgba(10, 10, 10, 0.28);
+  }
+  .demo-frame-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-rule);
+    background: var(--color-paper);
+  }
+  .demo-frame-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--color-rule);
+  }
+  .demo-frame-dot:first-child {
+    background: var(--color-accent);
+    opacity: 0.7;
+  }
+  .demo-frame-url {
+    margin-left: 10px;
+    flex: 1;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-mute);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .demo-frame-open {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+    border-bottom: 1px solid transparent;
+    transition: color 200ms ease, border-color 200ms ease;
+  }
+  .demo-frame-open:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  .demo-frame-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--color-paper-2);
+    overflow: hidden;
+    container-type: inline-size;
+    /* GPU-rasterize so the scaled iframe stays crisp on Chromium. */
+    transform: translateZ(0);
+  }
+  .demo-frame-stage iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1600px;
+    height: 900px;
+    border: 0;
+    display: block;
+    transform-origin: top left;
+    transform: scale(calc(100cqi / 1600px));
+  }
+  @supports not (width: 100cqi) {
+    .demo-frame-stage iframe {
+      transform: scale(0.6);
+    }
+  }
+  @media (max-width: 640px) {
+    .demo-frame-stage {
+      aspect-ratio: 4 / 3;
+    }
+    .demo-frame-stage iframe {
+      width: 1280px;
+      height: 960px;
+      transform: scale(calc(100cqi / 1280px));
+    }
+  }
+</style>

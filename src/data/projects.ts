@@ -13,6 +13,10 @@ export interface Project {
   tech: string[];
   context?: string;
   note?: string;
+  featured?: boolean;
+  preview?: { type: "embed" | "image"; src: string; alt: string };
+  demos?: { src: string; alt: string; caption?: string }[];
+  mockups?: { src: string; alt: string }[];
 }
 
 export const projects: Project[] = [
@@ -20,9 +24,27 @@ export const projects: Project[] = [
     slug: "muhimma-dashboards",
     title: "Muhimma. Production dashboards for enterprise brands.",
     kind: "Case study",
+    featured: true,
+    preview: {
+      type: "embed",
+      src: "https://portfolio-demo-1.aed7m.workers.dev/",
+      alt: "Live preview of a React dashboard built for Muhimma",
+    },
+    demos: [
+      {
+        src: "https://portfolio-demo-1.aed7m.workers.dev/",
+        alt: "Live React dashboard demo 1",
+        caption: "React dashboard — live demo",
+      },
+      {
+        src: "https://portfolio-demo-2.aed7m.workers.dev/",
+        alt: "Live React dashboard demo 2",
+        caption: "React dashboard — live demo",
+      },
+    ],
     tags: ["Power BI", "React", "Data modeling", "Enterprise BI"],
     summary:
-      "8+ Power BI and 2 React dashboards built for a regional consumer intelligence company serving 85+ brand clients across KSA & UAE.",
+      "8+ Power BI dashboards and 2 React dashboards architected end to end for a regional consumer intelligence company in KSA and the UAE.",
     intro:
       "Owned the full lifecycle of production-grade dashboards used directly by enterprise brand clients of one of the region's leading consumer intelligence companies. Built from raw research datasets and architecture documents into interactive tools for executive decision-makers, covering data modeling, KPI design, visual logic, and shipping to production.",
     highlights: [
@@ -35,7 +57,6 @@ export const projects: Project[] = [
     metrics: [
       { value: "8+", label: "Power BI dashboards in production" },
       { value: "2", label: "React dashboards architected end to end" },
-      { value: "400k+", label: "Verified consumers in source datasets" },
     ],
     tech: [
       "Power BI",
@@ -50,7 +71,7 @@ export const projects: Project[] = [
     context:
       "Muhimma Digital Platform Co. is a leading consumer intelligence company serving enterprise brand clients across Saudi Arabia and the UAE, operating a verified community of 400,000+ identity-verified members.",
     note:
-      "Masked client mockups will be added once client permission is confirmed. All work shown is at the level of scope, role, and impact. No client data is exposed.",
+      "Live demos use sample data. Masked Power BI dashboard screenshots will be added once client permission is confirmed. No client data is exposed.",
   },
   {
     slug: "automated-reporting-system",

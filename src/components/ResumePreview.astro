@@ -1,0 +1,233 @@
+---
+const RESUME_URL = "/resume/Abdelrahman_Elaref_Data_Analyst.pdf";
+const FILE_NAME = "Abdelrahman_Elaref_Data_Analyst.pdf";
+---
+
+<div
+  id="resume-preview"
+  class="resume-preview fixed inset-0 z-50 hidden items-center justify-center"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="resume-preview-title"
+  aria-hidden="true"
+>
+  <div
+    class="resume-preview__backdrop absolute inset-0 bg-ink/70 backdrop-blur-sm"
+    data-resume-close
+  >
+  </div>
+
+  <div
+    class="resume-preview__panel relative z-10 flex h-[92vh] w-[min(94vw,1100px)] flex-col border border-rule bg-paper shadow-2xl"
+  >
+    <header
+      class="flex items-center justify-between gap-4 border-b border-rule px-5 py-3 md:px-6"
+    >
+      <div class="min-w-0">
+        <p class="eyebrow text-mute">Document</p>
+        <p
+          id="resume-preview-title"
+          class="mt-0.5 truncate font-display text-sm md:text-base text-ink"
+        >
+          Abdelrahman Elaref — Resume
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2 md:gap-3">
+        <a
+          href={RESUME_URL}
+          target="_blank"
+          rel="noopener"
+          class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-ink border border-ink/15 hover:border-ink transition-colors"
+          aria-label="Open resume in a new tab"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+            ></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          Open
+        </a>
+        <a
+          href={RESUME_URL}
+          download={FILE_NAME}
+          class="inline-flex items-center gap-1.5 bg-ink text-paper px-3 py-2 text-xs font-medium hover:bg-accent transition-colors"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download
+        </a>
+        <button
+          type="button"
+          data-resume-close
+          class="inline-flex h-9 w-9 items-center justify-center text-mute hover:text-ink transition-colors"
+          aria-label="Close preview"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="6" y1="18" x2="18" y2="6"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="relative flex-1 bg-paper-2">
+      <!-- Lazy-loaded by JS to avoid fetching the PDF until the modal opens. -->
+      <iframe
+        id="resume-preview-frame"
+        title="Resume preview"
+        class="absolute inset-0 h-full w-full bg-paper-2"
+        src="about:blank"
+        loading="lazy"
+      ></iframe>
+
+      <!-- Mobile fallback: many mobile browsers can't render PDFs inline. -->
+      <div
+        class="resume-preview__fallback absolute inset-0 hidden flex-col items-center justify-center gap-4 px-6 text-center"
+      >
+        <p class="font-display text-base text-ink">
+          PDF preview isn&rsquo;t supported on this device.
+        </p>
+        <p class="text-sm text-mute max-w-sm">
+          Open the file in a new tab or download it below.
+        </p>
+        <div class="mt-2 flex flex-wrap justify-center gap-3">
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-ink border border-ink/15 hover:border-ink transition-colors"
+          >
+            Open in new tab
+          </a>
+          <a
+            href={RESUME_URL}
+            download={FILE_NAME}
+            class="inline-flex items-center gap-1.5 bg-ink text-paper px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
+          >
+            Download PDF
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .resume-preview.is-open {
+    display: flex;
+  }
+  .resume-preview.is-open[aria-hidden="false"] .resume-preview__panel {
+    animation: resumePreviewIn 220ms ease-out both;
+  }
+  @keyframes resumePreviewIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  /* When the fallback is on, hide the iframe so the layout collapses to the
+     fallback message on small touch devices. */
+  .resume-preview.use-fallback iframe {
+    display: none;
+  }
+  .resume-preview.use-fallback .resume-preview__fallback {
+    display: flex;
+  }
+</style>
+
+<script is:inline define:vars={{ RESUME_URL }}>
+  (function () {
+    const root = document.getElementById("resume-preview");
+    if (!root) return;
+    const frame = document.getElementById("resume-preview-frame");
+    let lastFocus = null;
+
+    // Treat narrow touch viewports as fallback. Most iOS Safari versions
+    // render the system PDF viewer fine in an iframe, but some Android
+    // browsers and in-app webviews don't — fallback is the safe default.
+    const isTouchSmall =
+      window.matchMedia("(hover: none) and (max-width: 640px)").matches;
+    if (isTouchSmall) root.classList.add("use-fallback");
+
+    function open() {
+      lastFocus = document.activeElement;
+      root.classList.add("is-open");
+      root.setAttribute("aria-hidden", "false");
+      document.documentElement.style.overflow = "hidden";
+      // Defer setting src until open so we don't fetch the PDF on page load.
+      if (frame && frame.getAttribute("src") !== RESUME_URL) {
+        frame.setAttribute("src", RESUME_URL + "#view=FitH");
+      }
+      const closeBtn = root.querySelector("button[data-resume-close]");
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function close() {
+      root.classList.remove("is-open");
+      root.setAttribute("aria-hidden", "true");
+      document.documentElement.style.overflow = "";
+      if (lastFocus && typeof lastFocus.focus === "function") {
+        lastFocus.focus();
+      }
+    }
+
+    document.addEventListener("click", (e) => {
+      const trigger = e.target.closest("[data-resume-preview]");
+      if (trigger) {
+        e.preventDefault();
+        open();
+        return;
+      }
+      const closer = e.target.closest("[data-resume-close]");
+      if (closer && root.contains(closer)) {
+        e.preventDefault();
+        close();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && root.classList.contains("is-open")) {
+        close();
+      }
+    });
+  })();
+</script>

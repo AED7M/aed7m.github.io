@@ -17,6 +17,7 @@
   --color-rule-strong: #18181b;
   --color-accent: #2247ff;
   --color-accent-soft: #dde4ff;
+  --grid-dot: rgba(10, 10, 10, 0.07);
 
   --font-display:
     "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
@@ -29,8 +30,8 @@
     monospace;
   --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
 
-  --text-display-1: clamp(2.5rem, 7.5vw, 6rem);
-  --text-display-2: clamp(2.25rem, 6vw, 4.5rem);
+  --text-display-1: clamp(2.5rem, 7vw, 5.5rem);
+  --text-display-2: clamp(1.75rem, 4.5vw, 3.5rem);
   --text-display-3: clamp(1.375rem, 2.5vw, 2rem);
   --text-metric: clamp(2.75rem, 6vw, 5rem);
 
@@ -38,10 +39,34 @@
   --tracking-mono: 0.04em;
 }
 
+/*
+  Dark theme. Activated by adding the `dark` class to <html>. The class is
+  set synchronously by an inline script in Layout.astro so there is no flash
+  on first paint. All Tailwind utilities (bg-paper, text-ink, border-rule,
+  text-accent, etc.) resolve through these vars and recolor automatically.
+*/
+html.dark {
+  --color-paper: #0b0b0d;
+  --color-paper-2: #161618;
+  --color-ink: #fafafa;
+  --color-ink-soft: #d4d4d8;
+  --color-mute: #a1a1aa;
+  --color-mute-soft: #71717a;
+  --color-rule: #27272a;
+  --color-rule-strong: #fafafa;
+  --color-accent: #6f8bff;
+  --color-accent-soft: #1c2747;
+  --grid-dot: rgba(250, 250, 250, 0.05);
+
+  color-scheme: dark;
+}
+
 @layer base {
+  /* overflow-x: clip prevents horizontal overflow without creating a
+     scroll container — required for position: sticky to keep working. */
   html,
   body {
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   html {
@@ -57,10 +82,11 @@
     font-family: var(--font-sans);
     font-size: 1.0625rem;
     line-height: 1.55;
-    /* Subtle dotted grid texture. Reads like graph paper, never dominates. */
+    /* Subtle dotted grid texture. Reads like graph paper, never dominates.
+       --grid-dot is themed: ink dots on light, paper dots on dark. */
     background-image: radial-gradient(
       circle,
-      rgba(10, 10, 10, 0.07) 1px,
+      var(--grid-dot) 1px,
       transparent 1px
     );
     background-size: 28px 28px;
@@ -168,6 +194,20 @@ p {
 .accent-mark {
   white-space: nowrap;
   color: var(--color-accent);
+}
+
+/* Active section indicator on the desktop nav.
+   text-decoration is more reliable than border across resets. */
+.nav-link {
+  text-decoration: underline 1.5px transparent;
+  text-underline-offset: 6px;
+  transition:
+    color 200ms ease,
+    text-decoration-color 200ms ease;
+}
+.nav-link.is-current {
+  color: var(--color-accent) !important;
+  text-decoration-color: var(--color-accent) !important;
 }
 
 .rule {

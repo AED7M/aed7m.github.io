@@ -2,6 +2,7 @@
 const links = [
   { href: "#experience", label: "Experience" },
   { href: "#work", label: "Selected Work" },
+  { href: "#background", label: "Background" },
   { href: "#contact", label: "Contact" },
 ];
 ---
@@ -10,7 +11,7 @@ const links = [
   class="sticky top-0 z-40 backdrop-blur-md bg-paper/85 border-b border-rule"
 >
   <div
-    class="mx-auto max-w-6xl px-6 lg:px-10 h-16 flex items-center justify-between"
+    class="mx-auto max-w-7xl px-6 lg:px-10 h-16 flex items-center justify-between"
   >
     <a
       href="#top"
@@ -28,7 +29,8 @@ const links = [
             <li>
               <a
                 href={link.href}
-                class="hover:text-ink transition-colors duration-200"
+                data-nav-link
+                class="nav-link hover:text-ink transition-colors duration-200"
               >
                 {link.label}
               </a>
@@ -37,30 +39,100 @@ const links = [
         }
       </ul>
       <a
-        href="/resume/Abdelrahman_Elaref_Resume.pdf"
+        href="/resume/Abdelrahman_Elaref_Data_Analyst.pdf"
         download
-        class="text-sm font-medium text-ink border-b border-accent pb-0.5 hover:text-accent transition-colors duration-200"
+        class="text-sm font-medium text-ink hover:text-accent transition-colors duration-200"
       >
         Resume
       </a>
+      <button
+        type="button"
+        data-theme-toggle
+        aria-label="Toggle theme"
+        class="theme-toggle inline-flex items-center justify-center w-9 h-9 rounded-full border border-rule text-ink hover:text-accent hover:border-accent transition-colors duration-200"
+      >
+        <svg
+          class="theme-icon-sun w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path
+            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+          ></path>
+        </svg>
+        <svg
+          class="theme-icon-moon w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 12.5A9 9 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5z"></path>
+        </svg>
+      </button>
     </nav>
 
-    <!-- Mobile hamburger -->
-    <button
-      type="button"
-      id="mobile-nav-open"
-      aria-label="Open menu"
-      aria-expanded="false"
-      aria-controls="mobile-nav"
-      class="md:hidden flex flex-col justify-center items-end gap-1.5 w-10 h-10 -mr-2 group"
-    >
-      <span
-        class="block h-px w-7 bg-ink transition-transform duration-300"
-        data-bar="top"></span>
-      <span
-        class="block h-px w-5 bg-ink transition-all duration-300 group-hover:w-7"
-      ></span>
-    </button>
+    <!-- Mobile cluster: theme toggle + hamburger -->
+    <div class="md:hidden flex items-center gap-1">
+      <button
+        type="button"
+        data-theme-toggle
+        aria-label="Toggle theme"
+        class="theme-toggle inline-flex items-center justify-center w-10 h-10 text-ink"
+      >
+        <svg
+          class="theme-icon-sun w-5 h-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path
+            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+          ></path>
+        </svg>
+        <svg
+          class="theme-icon-moon w-5 h-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 12.5A9 9 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5z"></path>
+        </svg>
+      </button>
+      <button
+        type="button"
+        id="mobile-nav-open"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        class="flex flex-col justify-center items-end gap-1.5 w-10 h-10 -mr-2 group"
+      >
+        <span
+          class="block h-px w-7 bg-ink transition-transform duration-300"
+          data-bar="top"></span>
+        <span
+          class="block h-px w-5 bg-ink transition-all duration-300 group-hover:w-7"
+        ></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -115,7 +187,7 @@ const links = [
       }
       <li class="border-b border-rule">
         <a
-          href="/resume/Abdelrahman_Elaref_Resume.pdf"
+          href="/resume/Abdelrahman_Elaref_Data_Analyst.pdf"
           download
           data-mobile-link
           class="flex items-center justify-between py-5 font-display text-3xl tracking-tight-er text-ink"
@@ -155,7 +227,52 @@ const links = [
   </nav>
 </div>
 
+<style>
+  /* Theme-toggle icon swap. The bootstrap script in Layout.astro sets
+     the `dark` class on <html> before paint, so the icon shown on first
+     render already matches the active theme. */
+  .theme-icon-sun {
+    display: none;
+  }
+  .theme-icon-moon {
+    display: inline-block;
+  }
+  html.dark .theme-icon-sun {
+    display: inline-block;
+  }
+  html.dark .theme-icon-moon {
+    display: none;
+  }
+</style>
+
 <script is:inline>
+  /* Theme toggle. Bootstrap (which set initial state) already ran in
+     Layout's <head>. Here we just wire click handlers and persist. */
+  (function () {
+    const root = document.documentElement;
+    const buttons = document.querySelectorAll("[data-theme-toggle]");
+    function syncAria() {
+      const isDark = root.classList.contains("dark");
+      buttons.forEach((b) => {
+        b.setAttribute("aria-pressed", String(isDark));
+        b.setAttribute(
+          "aria-label",
+          isDark ? "Switch to light theme" : "Switch to dark theme"
+        );
+      });
+    }
+    function toggleTheme() {
+      const next = !root.classList.contains("dark");
+      root.classList.toggle("dark", next);
+      try {
+        localStorage.setItem("theme", next ? "dark" : "light");
+      } catch (_) {}
+      syncAria();
+    }
+    buttons.forEach((b) => b.addEventListener("click", toggleTheme));
+    syncAria();
+  })();
+
   (function () {
     const openBtn = document.getElementById("mobile-nav-open");
     const closeBtn = document.getElementById("mobile-nav-close");
@@ -184,4 +301,82 @@ const links = [
       if (e.key === "Escape") close();
     });
   })();
+
+  /* Active-section indicator. Deferred to DOMContentLoaded because this
+     script is inlined at the Nav's position — before <main> and its
+     sections exist in the DOM. */
+  function initActiveNav() {
+    document.body.setAttribute("data-nav-script", "init");
+
+    const links = Array.from(document.querySelectorAll("[data-nav-link]"));
+    document.body.setAttribute("data-nav-links-found", String(links.length));
+    if (links.length === 0) return;
+
+    const pairs = [];
+    links.forEach((link) => {
+      const href = link.getAttribute("href") || "";
+      if (!href.startsWith("#")) return;
+      const target = document.querySelector(href);
+      if (target) pairs.push({ link, target });
+    });
+    document.body.setAttribute(
+      "data-nav-pairs",
+      String(pairs.length)
+    );
+    if (pairs.length === 0) return;
+
+    function setActive(link) {
+      links.forEach((l) => l.classList.remove("is-current"));
+      if (link) link.classList.add("is-current");
+    }
+
+    function update() {
+      const probe = window.innerHeight * 0.35;
+      let active = null;
+      // Find the section whose top is above the probe and bottom is below.
+      for (const { link, target } of pairs) {
+        const r = target.getBoundingClientRect();
+        if (r.top <= probe && r.bottom >= probe) {
+          active = link;
+          break;
+        }
+      }
+      // Fallback: section with the largest top that's still above the probe.
+      if (!active) {
+        let bestTop = -Infinity;
+        for (const { link, target } of pairs) {
+          const r = target.getBoundingClientRect();
+          if (r.top <= probe && r.top > bestTop) {
+            bestTop = r.top;
+            active = link;
+          }
+        }
+      }
+      setActive(active);
+      document.body.setAttribute(
+        "data-active-section",
+        active ? active.getAttribute("href") || "" : "none"
+      );
+    }
+
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initActiveNav);
+  } else {
+    initActiveNav();
+  }
 </script>

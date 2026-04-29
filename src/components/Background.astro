@@ -1,0 +1,170 @@
+---
+const skillGroups = [
+  {
+    label: "Business Intelligence",
+    items: [
+      "Power BI",
+      "DAX",
+      "Data modeling",
+      "KPI design",
+      "Dashboard architecture",
+      "Report design",
+    ],
+  },
+  {
+    label: "Data & Programming",
+    items: [
+      "Python",
+      "SQL",
+      "PostgreSQL",
+      "MySQL",
+      "Pandas · NumPy",
+      "Matplotlib · Seaborn",
+      "Scikit-learn",
+      "SQLAlchemy",
+    ],
+  },
+  {
+    label: "Workflow & Tooling",
+    items: [
+      "Excel · Power Query",
+      "Google Sheets",
+      "Jupyter",
+      "Git · GitHub",
+      "Docker",
+      "AI-assisted development (Claude Code)",
+      "ETL pipeline development",
+      "Cross-functional collaboration",
+    ],
+  },
+];
+
+const credentials = [
+  {
+    date: "Expected 2027",
+    title: "B.Sc. Artificial Intelligence Engineering",
+    org: "Mansoura University",
+    detail:
+      "Studying AI engineering with focus on machine learning, data analysis, and intelligent systems.",
+  },
+  {
+    date: "May 2025",
+    title: "Data Science Course",
+    org: "ALX × Explore AI",
+    detail:
+      "13-month program covering statistical analysis, machine learning, data visualization, and applied projects.",
+  },
+  {
+    date: "August 2024",
+    title: "Certified Data Analyst",
+    org: "DataCamp",
+    detail:
+      "Professional certification verifying data manipulation, visualization, and statistical analysis competence.",
+  },
+];
+---
+
+<section id="background" class="py-16 md:py-24 border-b border-rule">
+  <div class="mx-auto max-w-7xl px-6 lg:px-10">
+    <div class="reveal flex items-baseline gap-4 md:gap-6">
+      <span class="section-numeral">03</span>
+      <p class="eyebrow">Background</p>
+    </div>
+    <h2 class="display-2 mt-5 max-w-4xl reveal">
+      Tools I use, training that got me here.
+    </h2>
+
+    <!-- ============================== -->
+    <!-- Subsection: SKILLS              -->
+    <!-- Three-column toolkit groups,    -->
+    <!-- each with eyebrow + accent rule -->
+    <!-- ============================== -->
+    <div class="mt-16 md:mt-24">
+      <div class="reveal flex items-baseline gap-4">
+        <span
+          class="font-mono text-xs uppercase tracking-[0.16em] text-accent"
+          aria-hidden="true"
+        >
+          03 / A
+        </span>
+        <p class="eyebrow text-mute">Skills</p>
+      </div>
+      <h3 class="display-3 mt-3 max-w-3xl reveal">
+        The toolkit, organized.
+      </h3>
+
+      <div
+        class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-px bg-rule border border-rule"
+      >
+        {
+          skillGroups.map((group) => (
+            <div class="reveal bg-paper p-7 md:p-8">
+              <div class="flex items-baseline gap-3">
+                <h4 class="font-display text-xl md:text-2xl text-ink leading-tight">
+                  {group.label}
+                </h4>
+              </div>
+              <div class="mt-3 h-px w-10 bg-accent" />
+              <ul class="mt-6 flex flex-col gap-2.5">
+                {group.items.map((item) => (
+                  <li class="text-base text-ink-soft leading-snug">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- Subsection: CREDENTIALS         -->
+    <!-- Timeline-style with date rail   -->
+    <!-- ============================== -->
+    <div class="mt-20 md:mt-28">
+      <div class="reveal flex items-baseline gap-4">
+        <span
+          class="font-mono text-xs uppercase tracking-[0.16em] text-accent"
+          aria-hidden="true"
+        >
+          03 / B
+        </span>
+        <p class="eyebrow text-mute">Education & Certifications</p>
+      </div>
+      <h3 class="display-3 mt-3 max-w-3xl reveal">
+        Where the training came from.
+      </h3>
+
+      <ol class="mt-12 flex flex-col">
+        {
+          credentials.map((item, i) => (
+            <li
+              class={`reveal flex flex-col md:flex-row gap-4 md:gap-12 py-7 md:py-8 ${
+                i === 0 ? "border-t border-rule" : ""
+              } border-b border-rule relative md:pl-6`}
+            >
+              {/* Decorative left accent on each row */}
+              <span
+                class="hidden md:block absolute left-0 top-7 bottom-7 w-px bg-accent/30"
+                aria-hidden="true"
+              />
+              <div class="md:w-44 shrink-0">
+                <p class="eyebrow text-mute">{item.date}</p>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-display text-xl md:text-2xl text-ink leading-tight">
+                  {item.title}
+                </h4>
+                <p class="mt-1 text-sm text-mute">{item.org}</p>
+                <p class="mt-3 text-base text-ink-soft leading-relaxed max-w-2xl">
+                  {item.detail}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>

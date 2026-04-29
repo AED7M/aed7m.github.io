@@ -1,9 +1,16 @@
 ---
 import { projects } from "../data/projects";
+
+const featured = projects.find((p) => p.featured);
+const others = projects.filter((p) => !p.featured);
+const demoCount = featured?.demos?.length ?? 0;
+const mockupCount = featured?.mockups?.length ?? 0;
+const insideCount = demoCount + mockupCount;
+const preview = featured?.preview;
 ---
 
 <section id="work" class="py-16 md:py-24 border-b border-rule bg-paper-2/60">
-  <div class="mx-auto max-w-6xl px-6 lg:px-10">
+  <div class="mx-auto max-w-7xl px-6 lg:px-10">
     <div class="reveal flex items-baseline gap-4 md:gap-6">
       <span class="section-numeral">02</span>
       <p class="eyebrow">Selected Work</p>
@@ -11,54 +18,198 @@ import { projects } from "../data/projects";
     <h2 class="display-2 mt-5 max-w-4xl reveal">
       Four projects, picked for what they show.
     </h2>
-    <p class="mt-6 max-w-2xl text-base md:text-lg text-ink-soft leading-relaxed reveal">
+    <p
+      class="mt-6 max-w-2xl text-base md:text-lg text-ink-soft leading-relaxed reveal"
+    >
       One enterprise case study, two end-to-end data pipelines, one machine
       learning project. Together they cover production BI, ETL, dashboarding,
       and modeling.
     </p>
 
-    <ul class="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-2 gap-px bg-rule border border-rule">
-      {
-        projects.map((p, i) => (
-          <li class="bg-paper">
-            <a
-              href={`/work/${p.slug}/`}
-              class="group block h-full p-7 md:p-10 transition-colors duration-300 hover:bg-paper-2/60"
-            >
-              <div class="flex items-center justify-between">
-                <span class="eyebrow">{p.kind}</span>
-                <span
-                  class="text-xs uppercase tracking-wider text-mute opacity-0 group-hover:opacity-100 transition-opacity"
-                  aria-hidden="true"
-                >
-                  Read &rarr;
-                </span>
-              </div>
+    {
+      featured && (
+        <a
+          href={`/work/${featured.slug}/`}
+          class="featured-card group relative mt-14 md:mt-20 grid md:grid-cols-12 gap-8 md:gap-12 p-7 md:p-12 border border-rule bg-paper overflow-hidden reveal"
+        >
+          <span class="featured-glow" aria-hidden="true" />
 
-              <h3 class="display-3 mt-5 text-ink leading-tight">
-                {p.title}
-              </h3>
+          <div class="relative md:col-span-6 flex flex-col">
+            <div class="flex items-center gap-3">
+              <span class="eyebrow">{featured.kind}</span>
+              <span class="h-px w-8 bg-rule" aria-hidden="true" />
+              <span class="eyebrow text-accent">Featured</span>
+            </div>
 
-              <p class="mt-5 text-base text-ink-soft leading-relaxed">
-                {p.summary}
-              </p>
+            <h3 class="featured-title mt-5 text-ink leading-tight">
+              {featured.title}
+            </h3>
 
-              <ul class="mt-6 flex flex-wrap gap-1.5">
-                {p.tags.map((t) => (
-                  <li class="text-[11px] uppercase tracking-wider text-mute border border-rule px-2.5 py-1">
-                    {t}
-                  </li>
+            <p class="mt-5 text-base md:text-lg text-ink-soft leading-relaxed">
+              {featured.summary}
+            </p>
+
+            {featured.metrics && (
+              <dl class="mt-8 grid grid-cols-2 gap-6 max-w-md">
+                {featured.metrics.slice(0, 2).map((m) => (
+                  <div class="border-l-2 border-accent pl-4">
+                    <dt class="featured-metric text-ink">{m.value}</dt>
+                    <dd class="mt-2 text-xs text-mute leading-snug">
+                      {m.label}
+                    </dd>
+                  </div>
                 ))}
-              </ul>
+              </dl>
+            )}
 
-              <div class="mt-8 flex items-center gap-2 text-sm text-ink">
-                <span class="font-medium">View case</span>
+            <div class="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
+              <span class="featured-cta inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-paper bg-accent">
+                {demoCount > 0
+                  ? "Open live demos inside"
+                  : "Open the case study"}
                 <span
                   class="inline-block transition-transform duration-300 group-hover:translate-x-1"
                   aria-hidden="true"
                 >
                   &rarr;
                 </span>
+              </span>
+              {insideCount > 0 && (
+                <span class="inline-flex items-center text-xs uppercase tracking-wider text-mute">
+                  <span class="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-accent" />
+                  {demoCount > 0 && (
+                    <>
+                      {demoCount} live demo{demoCount === 1 ? "" : "s"}
+                    </>
+                  )}
+                  {demoCount > 0 && mockupCount > 0 && <>&nbsp;· </>}
+                  {mockupCount > 0 && (
+                    <>
+                      {mockupCount} mockup{mockupCount === 1 ? "" : "s"}
+                    </>
+                  )}
+                </span>
+              )}
+            </div>
+          </div>
+
+          <div class="relative md:col-span-6 flex items-center justify-center">
+            {preview?.type === "embed" ? (
+              <div class="preview-embed relative w-full aspect-video overflow-hidden border border-rule bg-paper-2">
+                <div class="preview-embed-frame">
+                  <iframe
+                    src={preview.src}
+                    title={preview.alt}
+                    loading="lazy"
+                    aria-hidden="true"
+                    tabindex="-1"
+                    sandbox="allow-scripts allow-same-origin"
+                    referrerpolicy="no-referrer"
+                  />
+                </div>
+                <span class="preview-embed-veil" aria-hidden="true" />
+                <span class="preview-embed-chip">
+                  <span class="preview-embed-dot" aria-hidden="true" />
+                  Live demo
+                </span>
+              </div>
+            ) : preview?.type === "image" ? (
+              <div class="mockup-stack relative w-full aspect-[4/3]">
+                <img
+                  src={preview.src}
+                  alt={preview.alt}
+                  loading="lazy"
+                  class="mockup-stack-item mockup-stack-item-1 absolute inset-0 w-full h-full object-cover border border-rule"
+                />
+              </div>
+            ) : mockupCount > 0 ? (
+              <div class="mockup-stack relative w-full aspect-[4/3]">
+                {featured.mockups!.slice(0, 3).map((m, i) => (
+                  <img
+                    src={m.src}
+                    alt={m.alt}
+                    loading="lazy"
+                    class={`mockup-stack-item mockup-stack-item-${i} absolute inset-0 w-full h-full object-cover border border-rule`}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div class="mockup-placeholder relative w-full aspect-[4/3] overflow-hidden border border-rule bg-paper-2">
+                <span
+                  class="placeholder-grid absolute inset-0"
+                  aria-hidden="true"
+                />
+                <span class="placeholder-bar placeholder-bar-1" aria-hidden="true" />
+                <span class="placeholder-bar placeholder-bar-2" aria-hidden="true" />
+                <span class="placeholder-bar placeholder-bar-3" aria-hidden="true" />
+                <div class="absolute inset-0 flex items-end p-5">
+                  <span class="text-[11px] uppercase tracking-wider text-mute">
+                    Masked mockups arriving soon
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+        </a>
+      )
+    }
+
+    <ul
+      class="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-px bg-rule border border-rule"
+    >
+      {
+        others.map((p) => (
+          <li class="bg-paper">
+            <a
+              href={`/work/${p.slug}/`}
+              class="group block h-full transition-colors duration-300 hover:bg-paper-2/60"
+            >
+              {p.cover && (
+                <div class="relative aspect-[16/10] overflow-hidden border-b border-rule bg-paper-2">
+                  <img
+                    src={p.cover}
+                    alt={p.coverAlt ?? p.title}
+                    loading="lazy"
+                    class="card-cover absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
+              )}
+              <div class="p-7 md:p-8">
+                <div class="flex items-center justify-between">
+                  <span class="eyebrow">{p.kind}</span>
+                  <span
+                    class="text-xs uppercase tracking-wider text-mute opacity-0 group-hover:opacity-100 transition-opacity"
+                    aria-hidden="true"
+                  >
+                    Read &rarr;
+                  </span>
+                </div>
+
+                <h3 class="card-title mt-4 text-ink leading-tight">
+                  {p.title}
+                </h3>
+
+                <p class="mt-4 text-sm text-ink-soft leading-relaxed">
+                  {p.summary}
+                </p>
+
+                <ul class="mt-5 flex flex-wrap gap-1.5">
+                  {p.tags.slice(0, 3).map((t) => (
+                    <li class="text-[10px] uppercase tracking-wider text-mute border border-rule px-2 py-0.5">
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+
+                <div class="mt-6 flex items-center gap-2 text-sm text-ink">
+                  <span class="font-medium">View case</span>
+                  <span
+                    class="inline-block transition-transform duration-300 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  >
+                    &rarr;
+                  </span>
+                </div>
               </div>
             </a>
           </li>
@@ -67,3 +218,234 @@ import { projects } from "../data/projects";
     </ul>
   </div>
 </section>
+
+<style>
+  .featured-card {
+    transition:
+      background-color 300ms ease,
+      border-color 300ms ease;
+  }
+  .featured-card:hover {
+    background-color: color-mix(in srgb, var(--color-paper-2) 70%, transparent);
+    border-color: var(--color-mute-soft);
+  }
+
+  .featured-glow {
+    position: absolute;
+    inset: -20% -10% auto auto;
+    width: 70%;
+    height: 130%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(34, 71, 255, 0.12) 0%,
+      rgba(34, 71, 255, 0.05) 40%,
+      transparent 70%
+    );
+    pointer-events: none;
+    transition: opacity 600ms ease;
+  }
+
+  .featured-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .featured-metric {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-feature-settings: "tnum";
+  }
+
+  .featured-cta {
+    transition:
+      transform 300ms ease,
+      box-shadow 300ms ease;
+    box-shadow: 0 0 0 0 rgba(34, 71, 255, 0);
+  }
+  .featured-card:hover .featured-cta {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px -10px rgba(34, 71, 255, 0.45);
+  }
+
+  .preview-embed {
+    box-shadow: 0 22px 50px -22px rgba(10, 10, 10, 0.28);
+    transform: translateZ(0);
+    container-type: inline-size;
+  }
+  .preview-embed-frame {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  /* Dashboard is rendered at a true desktop viewport (1440x810) and scaled
+     to fit the container exactly. Container and iframe share a 16:9 ratio,
+     so width-based scaling fits both axes. */
+  .preview-embed-frame iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    height: 810px;
+    border: 0;
+    transform-origin: top left;
+    transform: scale(calc(100cqw / 1440px));
+    pointer-events: none;
+  }
+  .preview-embed-veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-paper) 0%, transparent) 55%,
+      color-mix(in srgb, var(--color-paper) 55%, transparent) 100%
+    );
+    transition: background 400ms ease;
+    pointer-events: none;
+  }
+  .featured-card:hover .preview-embed-veil {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-paper) 0%, transparent) 70%,
+      color-mix(in srgb, var(--color-paper) 35%, transparent) 100%
+    );
+  }
+  .preview-embed-chip {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: var(--color-paper);
+    border: 1px solid var(--color-rule);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+  .preview-embed-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 0 rgba(34, 71, 255, 0.6);
+    animation: preview-pulse 2.4s ease-out infinite;
+  }
+  @keyframes preview-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(34, 71, 255, 0.5);
+    }
+    70% {
+      box-shadow: 0 0 0 8px rgba(34, 71, 255, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(34, 71, 255, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .preview-embed-dot {
+      animation: none;
+    }
+  }
+
+  .mockup-stack-item {
+    transition: transform 600ms cubic-bezier(0.2, 0.6, 0.2, 1);
+    background: var(--color-paper);
+    box-shadow: 0 18px 40px -20px rgba(10, 10, 10, 0.25);
+  }
+  .mockup-stack-item-0 {
+    transform: translate(-14%, 8%) rotate(-7deg);
+    z-index: 1;
+  }
+  .mockup-stack-item-1 {
+    transform: translate(0, 0) rotate(0deg);
+    z-index: 3;
+  }
+  .mockup-stack-item-2 {
+    transform: translate(14%, -8%) rotate(7deg);
+    z-index: 2;
+  }
+  .featured-card:hover .mockup-stack-item-0 {
+    transform: translate(-22%, 12%) rotate(-10deg);
+  }
+  .featured-card:hover .mockup-stack-item-2 {
+    transform: translate(22%, -12%) rotate(10deg);
+  }
+
+  .mockup-placeholder {
+    box-shadow: 0 18px 40px -22px rgba(10, 10, 10, 0.2);
+  }
+  .placeholder-grid {
+    background-image:
+      linear-gradient(to right, rgba(10, 10, 10, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10, 10, 10, 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: -1px -1px;
+  }
+  .placeholder-bar {
+    position: absolute;
+    background: var(--color-rule);
+    height: 8px;
+    border-radius: 1px;
+  }
+  .placeholder-bar-1 {
+    top: 22%;
+    left: 12%;
+    width: 38%;
+    background: var(--color-accent);
+    opacity: 0.6;
+  }
+  .placeholder-bar-2 {
+    top: 36%;
+    left: 12%;
+    width: 64%;
+  }
+  .placeholder-bar-3 {
+    top: 48%;
+    left: 12%;
+    width: 50%;
+  }
+
+  .card-cover {
+    filter: saturate(0.55) brightness(0.95);
+    transition:
+      filter 500ms ease,
+      transform 600ms cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+  .group:hover .card-cover {
+    filter: saturate(1) brightness(1);
+    transform: scale(1.04);
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.125rem, 1.75vw, 1.375rem);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mockup-stack-item,
+    .card-cover,
+    .featured-cta {
+      transition: none;
+    }
+    .featured-card:hover .mockup-stack-item-0,
+    .featured-card:hover .mockup-stack-item-2,
+    .group:hover .card-cover {
+      transform: none;
+    }
+  }
+</style>
