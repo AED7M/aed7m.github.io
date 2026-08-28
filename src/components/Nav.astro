@@ -1,9 +1,9 @@
 ---
 const links = [
-  { href: "#experience", label: "Experience" },
-  { href: "#work", label: "Selected Work" },
-  { href: "#background", label: "Background" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#work", label: "Selected Work" },
+  { href: "/#background", label: "Background" },
+  { href: "/#contact", label: "Contact" },
 ];
 ---
 
@@ -14,7 +14,7 @@ const links = [
     class="mx-auto max-w-7xl px-6 lg:px-10 h-16 flex items-center justify-between"
   >
     <a
-      href="#top"
+      href="/"
       class="font-display text-base sm:text-lg tracking-tight-er text-ink truncate"
       aria-label="Abdelrahman Elaref"
     >
@@ -314,7 +314,7 @@ const links = [
 
     const pairs = [];
     links.forEach((link) => {
-      const href = link.getAttribute("href") || "";
+      const href = (link.getAttribute("href") || "").replace(/^\//, "");
       if (!href.startsWith("#")) return;
       const target = document.querySelector(href);
       if (target) pairs.push({ link, target });
@@ -355,7 +355,9 @@ const links = [
       setActive(active);
       document.body.setAttribute(
         "data-active-section",
-        active ? active.getAttribute("href") || "" : "none"
+        active
+          ? (active.getAttribute("href") || "").replace(/^\//, "")
+          : "none"
       );
     }
 

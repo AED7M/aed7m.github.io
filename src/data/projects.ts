@@ -42,6 +42,44 @@ export const projects: Project[] = [
         caption: "React dashboard — live demo",
       },
     ],
+    mockups: [
+      {
+        src: "/img/muhimma/muhimma-dashboard.png",
+        alt: "Power BI dashboard with demographic slicers and multi-category bar chart comparisons",
+      },
+      {
+        src: "/img/muhimma/muhimma-dashboard_1.png",
+        alt: "Power BI dashboard featuring Likert-scale visualizations and image card layouts",
+      },
+      {
+        src: "/img/muhimma/muhimma-dashboard_2.png",
+        alt: "Power BI KPI ranking dashboard with progress bars and drill-down filters",
+      },
+      {
+        src: "/img/muhimma/muhimma-dashboard_3.png",
+        alt: "Power BI campaign KPI dashboard with donut, bar, and pie chart visuals",
+      },
+      {
+        src: "/img/muhimma/muhimma-dashboard_4.png",
+        alt: "Power BI demographic profiling dashboard with percentage bars and donut charts",
+      },
+      {
+        src: "/img/muhimma/muhimma-dashboard_5.png",
+        alt: "Power BI multi-level operations dashboard with role-based navigation and ranking cards",
+      },
+      {
+        src: "/img/muhimma/muhimma-dashboard_6.png",
+        alt: "Power BI benchmarking dashboard with dynamic KPI tables and conditional formatting",
+      },
+      {
+        src: "/img/muhimma/muhimma-dashboard_7.png",
+        alt: "Power BI survey results dashboard with stacked bars, donuts, and column charts",
+      },
+      {
+        src: "/img/muhimma/muhimma-dashboard_8.png",
+        alt: "Power BI sentiment comparison dashboard with multi-column bar matrix and slicers",
+      },
+    ],
     tags: ["Power BI", "React", "Data modeling", "Enterprise BI"],
     summary:
       "8+ Power BI dashboards and 2 React dashboards architected end to end for a regional consumer intelligence company in KSA and the UAE.",
@@ -71,7 +109,7 @@ export const projects: Project[] = [
     context:
       "Muhimma Digital Platform Co. is a leading consumer intelligence company serving enterprise brand clients across Saudi Arabia and the UAE, operating a verified community of 400,000+ identity-verified members.",
     note:
-      "Live demos use sample data. Masked Power BI dashboard screenshots will be added once client permission is confirmed. No client data is exposed.",
+      "Live demos use sample data. Power BI screenshots are masked to protect client confidentiality. No client data is exposed.",
   },
   {
     slug: "automated-reporting-system",

@@ -8,29 +8,31 @@ const stats = [
 
 <section
   id="top"
-  class="relative pt-6 md:pt-12 pb-16 md:pb-24 border-b border-rule"
+  class="hero-spotlight relative pt-6 md:pt-12 pb-16 md:pb-24 border-b border-rule"
 >
   <div class="mx-auto max-w-7xl px-6 lg:px-10 relative">
-    <p class="eyebrow reveal">
-      Data Analyst <span class="mx-1 text-mute-soft">/</span> Remote
+    <p class="eyebrow hero-rise">
+      Microsoft Certified Data Analyst <span class="mx-1 text-mute-soft">/</span> Remote
     </p>
 
-    <h1 class="display-1 mt-5 md:mt-7 max-w-5xl reveal">
+    <h1 class="display-1 mt-5 md:mt-7 max-w-5xl hero-rise" style="animation-delay: 120ms;">
       Turning consumer <span class="accent-mark">intelligence</span> into
       business decisions.
     </h1>
 
     <p
-      class="display-3 mt-5 md:mt-7 max-w-3xl text-mute reveal"
+      class="display-3 mt-5 md:mt-7 max-w-3xl text-mute hero-rise"
+      style="animation-delay: 240ms;"
     >
       <span class="serif-italic">I build production dashboards for enterprise brands.</span>
     </p>
 
     <div
-      class="mt-8 max-w-2xl text-base md:text-lg text-ink-soft leading-relaxed reveal"
+      class="mt-8 max-w-2xl text-base md:text-lg text-ink-soft leading-relaxed hero-rise"
+      style="animation-delay: 360ms;"
     >
       <p>
-        Most recently at <a
+        Microsoft Certified Power BI Data Analyst (PL-300). Most recently at <a
           href="#experience"
           class="prose-link font-medium text-ink">Muhimma Digital</a
         >, where I owned the lifecycle of Power BI and React dashboards used
@@ -40,10 +42,17 @@ const stats = [
       </p>
     </div>
 
-    <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 reveal">
+    <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 hero-rise" style="animation-delay: 480ms;">
+      <a
+        href="/work/muhimma-dashboards/"
+        class="btn-cta inline-flex items-center justify-center gap-2 text-paper px-6 py-3 text-sm font-medium"
+      >
+        <span class="btn-text">View my work</span>
+        <span aria-hidden="true">→</span>
+      </a>
       <a
         href="#contact"
-        class="inline-flex items-center justify-center gap-2 bg-ink text-paper px-6 py-3 text-sm font-medium hover:bg-accent transition-colors duration-200"
+        class="inline-flex items-center justify-center gap-2 text-ink px-6 py-3 text-sm font-medium border border-ink/15 hover:border-ink transition-colors duration-200"
       >
         Get in touch
         <span aria-hidden="true">→</span>
@@ -75,3 +84,61 @@ const stats = [
   </div>
 
 </section>
+
+<script>
+  (function () {
+    const hero = document.querySelector(".hero-spotlight");
+    if (!hero) return;
+
+    let glowDiv;
+    function createGlow() {
+      glowDiv = document.createElement("div");
+      glowDiv.className = "hero-glow";
+      hero.prepend(glowDiv);
+    }
+    createGlow();
+
+    let x = 0, y = 0, raf = null;
+    hero.addEventListener("mousemove", (e) => {
+      const rect = hero.getBoundingClientRect();
+      x = e.clientX - rect.left;
+      y = e.clientY - rect.top;
+      if (!raf) {
+        raf = requestAnimationFrame(() => {
+          glowDiv.style.setProperty("--gx", x + "px");
+          glowDiv.style.setProperty("--gy", y + "px");
+          glowDiv.style.opacity = "1";
+          raf = null;
+        });
+      }
+    });
+
+    hero.addEventListener("mouseleave", () => {
+      glowDiv.style.opacity = "0";
+    });
+  })();
+</script>
+
+<style>
+  .hero-spotlight {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 400ms ease;
+    background: radial-gradient(
+      600px circle at var(--gx, 50%) var(--gy, 50%),
+      rgba(34, 71, 255, 0.06),
+      transparent 40%
+    );
+    z-index: 0;
+  }
+  .hero-spotlight > .mx-auto {
+    position: relative;
+    z-index: 1;
+  }
+</style>

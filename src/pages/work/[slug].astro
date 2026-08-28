@@ -148,7 +148,7 @@ const { project } = Astro.props;
 
       {
         project.mockups && project.mockups.length > 0 && (
-          <div class="mx-auto max-w-7xl px-6 lg:px-10">
+          <div class="mx-auto max-w-7xl px-6 lg:px-10" data-mockups-section>
             <section class="mt-14 reveal">
               <div class="flex items-baseline justify-between gap-4">
                 <h2 class="eyebrow">Dashboard mockups</h2>
@@ -159,18 +159,43 @@ const { project } = Astro.props;
               </div>
               <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {project.mockups.map((m) => (
-                  <figure class="overflow-hidden border border-rule bg-paper-2">
+                  <figure class="mockup-thumb overflow-hidden border border-rule bg-paper-2">
                     <img
                       src={m.src}
                       alt={m.alt}
                       loading="lazy"
-                      class="w-full h-auto transition-transform duration-500 hover:scale-[1.02]"
+                      class="w-full h-auto cursor-zoom-in transition-transform duration-500 hover:scale-[1.02]"
                     />
                   </figure>
                 ))}
               </div>
             </section>
+
+            <div
+              class="lightbox"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Dashboard preview expanded"
+            >
+              <button class="lightbox-close" aria-label="Close preview">✕</button>
+              <img class="lightbox-img" src="" alt="" />
+            </div>
           </div>
+        )
+      }
+
+      {
+        project.mockups && project.mockups.length > 0 && (
+          <button
+            class="scroll-badge"
+            data-scroll-badge
+            aria-label="Show dashboard screenshots"
+          >
+            <span class="scroll-badge-text">
+              {project.mockups.length} dashboard screenshots below
+            </span>
+            <span class="scroll-badge-arrow" aria-hidden="true">↓</span>
+          </button>
         )
       }
 
@@ -276,6 +301,105 @@ const { project } = Astro.props;
 </Layout>
 
 <style>
+  /* Floating "more below" badge. Centered at bottom, rounded, with border. */
+  .scroll-badge {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border: 1.5px solid var(--color-accent);
+    border-radius: 50px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: 1;
+    transition:
+      opacity 300ms ease,
+      transform 300ms ease;
+    pointer-events: auto;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  }
+  .scroll-badge.hidden {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+    pointer-events: none;
+  }
+  .scroll-badge:hover {
+    border-color: var(--color-paper);
+  }
+  .scroll-badge-icon {
+    display: flex;
+    align-items: center;
+  }
+  .scroll-badge-arrow {
+    display: inline-block;
+    font-size: 16px;
+    animation: badge-bounce 2s ease-in-out infinite;
+  }
+  @keyframes badge-bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(4px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-badge-arrow {
+      animation: none;
+    }
+  }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.85);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms ease;
+  }
+  .lightbox.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .lightbox img {
+    max-width: 92%;
+    max-height: 92%;
+    object-fit: contain;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 200ms ease;
+  }
+  .lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
   .demo-frame {
     box-shadow: 0 24px 60px -28px rgba(10, 10, 10, 0.28);
   }
@@ -357,3 +481,54 @@ const { project } = Astro.props;
     }
   }
 </style>
+
+<script>
+  /* Lightbox */
+  const lightbox = document.querySelector(".lightbox");
+  const lightboxImg = lightbox?.querySelector(".lightbox-img");
+  const closeBtn = lightbox?.querySelector(".lightbox-close");
+
+  document.querySelectorAll(".mockup-thumb img").forEach((img) => {
+    img.addEventListener("click", () => {
+      if (!lightbox || !lightboxImg) return;
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add("open");
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  closeBtn?.addEventListener("click", closeLightbox);
+  lightbox?.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeLightbox();
+  });
+
+  /* Floating "more below" badge — hide when mockups section is visible. */
+  (function () {
+    const badge = document.querySelector("[data-scroll-badge]");
+    const section = document.querySelector("[data-mockups-section]");
+    if (!badge || !section) return;
+
+    function checkVisibility() {
+      const rect = section.getBoundingClientRect();
+      const visible = rect.top < window.innerHeight * 0.8;
+      badge.classList.toggle("hidden", visible);
+    }
+
+    badge.addEventListener("click", () => {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    window.addEventListener("scroll", checkVisibility, { passive: true });
+    checkVisibility();
+  })();
+</script>
